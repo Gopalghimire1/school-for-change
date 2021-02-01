@@ -170,6 +170,7 @@
                                     <th><?php echo app('translator')->getFromJson('lang.class'); ?></th>
                                     <th><?php echo app('translator')->getFromJson('lang.section'); ?></th>
                                     <th><?php echo app('translator')->getFromJson('lang.action'); ?></th>
+                                    <th>Create Student</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -211,6 +212,7 @@
                                            <?php endif; ?>
                                             </div>
                                         </div>
+                                        <td><a href="<?php echo e(route('new_student_store',[$classSection->section_id,$classSection->section_id])); ?>" class="btn btn-primary btn-sm">Add New Student</a></td>
                                     </td>
                                 </tr>
                                 

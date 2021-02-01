@@ -141,19 +141,34 @@
             </div>
             <div class="p-3">
                 <h5>
-                    <div class="d-flex">
-                        <span>THE GRADE(S) SECURED BY :</span>
+                    <div class="d-flex mb-1">
+                        <span>THE GRADE(S) SECURED BY : </span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->full_name}}</span>
                     </div>
-                    DATE OF BIRTH : {{$std->date_of_birth}} <br>
-                    REGISTRATION NO. : {{$std->admission_no}} SYMBOL NO. : {{$std->roll_no}} GRADE : {{$std->class->class_name}} <br>
-                    OF............................................................................................................................................................................................<br>
-                <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN.................... ARE GIVEN BELOW.</h5>
+                    <div class="d-flex mb-1">
+                        <span> DATE OF BIRTH : </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->date_of_birth}}</span>
+                    </div>
+                    <div class="mb-1" style="display: flex; justify-content: space-between">
+                        <span>REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->admission_no}}</span></span>
+                        <span>SYMBOL NO. : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->roll_no}}</span></span>
+                        <span>GRADE : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->class->class_name}}</span></span>
+                    </div>
+                    <div class="d-flex mb-1">
+                        <span>OF</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"></span>
+                    </div>
+                    <div class="d-flex mb-1">
+                        <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
+                    </div>
+                    <span>ARE GIVEN BELOW.</span>
+                </h5>
             </div>
 
             <div class="col-md-12">
                 
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet">
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
                 <thead>
                     <tr>
                         <th>Code</th>
@@ -183,9 +198,13 @@
                     </tbody>
                 </thead>
             </table>
-            <div class="row">
+            <div class="mt-5">PREPARED BY:</div>
+            <div class="row mt-5">
                 <div class="col-lg-12">
-                
+                <div style="display: flex; justify-content: space-between">
+                    <span style="border-top:2px dotted black;padding-right:20px;">CHECKED BY</span>
+                    <span style="border-top:2px dotted black;padding-right:20px;">CONTROLLER OF EXAMINATIONS</span>
+                </div>
                 </div>
             </div>
 

@@ -408,7 +408,7 @@ class SmStudentAdmissionController extends Controller
 
                         DB::commit();
                         Toastr::success('Operation successful', 'Success');
-                        return redirect('student-list');
+                        return redirect('student/list');
                     } catch (\Exception $e) {
                         DB::rollback();
                         Toastr::error('Operation Failed', 'Failed');
@@ -430,6 +430,32 @@ class SmStudentAdmissionController extends Controller
             return redirect()->back();
         }
     }
+
+
+    // simple type student add 
+     public function newStudentStore(Request $request, $cls, $section){
+         if($request->isMethod('post')){
+                $student = new SmStudent();
+                $student->role_id = 2;
+                $student->full_name = $request->full_name;
+                $student->date_of_birth = $request->dob;
+                $student->class_id = $cls;
+                $student->section_id = $section;
+                $student->roll_no = $request->roll;
+                $student->admission_no = $request->adm;
+            // dd($student);
+            $ses = SmSession::where('is_default',1)->first();
+            $student->session_id = $ses->id;
+            $student->save();
+            Toastr::success('Operation successful', 'Success');
+            return redirect()->back();
+         }else{
+             $classs_id = $cls;
+             $section_id = $section;
+             return view('backEnd.academics.new_std',compact('classs_id','section_id'));
+         }
+     }
+
     function admissionPic(Request $r)
     {
         try {

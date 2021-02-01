@@ -896,6 +896,12 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     //student store
     Route::post('student-store', ['as' => 'student_store', 'uses' => 'SmStudentAdmissionController@studentStore']);
 
+
+    Route::match(['get', 'post'],'newstudent/{cls}/{section}', 
+      [
+          'as' => 'new_student_store',
+          'uses' => 'SmStudentAdmissionController@newStudentStore'
+      ]);
     //Student details document
 
     Route::get('delete-document/{id}', ['as' => 'delete_document', 'uses' => 'SmStudentAdmissionController@deleteDocument']);

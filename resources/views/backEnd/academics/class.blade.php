@@ -164,6 +164,7 @@
                                     <th>@lang('lang.class')</th>
                                     <th>@lang('lang.section')</th>
                                     <th>@lang('lang.action')</th>
+                                    <th>Create Student</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -204,6 +205,7 @@
                                            @endif
                                             </div>
                                         </div>
+                                        <td><a href="{{ route('new_student_store',[$classSection->section_id,$classSection->section_id]) }}" class="btn btn-primary btn-sm">Add New Student</a></td>
                                     </td>
                                 </tr>
                                 
