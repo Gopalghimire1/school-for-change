@@ -51,7 +51,6 @@
     ">
         <label for="relationFather">For Single Student</label>
     </div>
-
     <div>
         <span class="primary-btn small fix-gr-bg" onclick="printDiv('printdiv');">Print</span>
     </div>
@@ -120,13 +119,14 @@
         </div>
     {{ Form::close() }}
 </div>
-<div class="mt-4">
+<div class="mt-4" id="printdiv">
+    @foreach ($datas as $data)
         @php
             $std=$data['std'];
             // dd($std);
         @endphp
-        <div class="card-body" id="printdiv">
-            <div class="row text-center">
+        <div class="card-body" >
+            <div class="row text-center mb-5">
                 <div class="col-md-2">
                     logo
                 </div>
@@ -139,19 +139,18 @@
                     logo
                 </div>
             </div>
-        <div class="p-3" style="text-align: justify;">
+            <div class="p-3">
+                <h5>
+                    <div class="d-flex">
+                        <span>THE GRADE(S) SECURED BY :</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->full_name}}</span>
+                    </div>
+                    DATE OF BIRTH : {{$std->date_of_birth}} <br>
+                    REGISTRATION NO. : {{$std->admission_no}} SYMBOL NO. : {{$std->roll_no}} GRADE : {{$std->class->class_name}} <br>
+                    OF............................................................................................................................................................................................<br>
+                <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN.................... ARE GIVEN BELOW.</h5>
+            </div>
 
-            <h4>
-                <div class="d-flex">
-                    <span>THE GRADE(S) SECURED BY :</span>
-                    <span style="flex-grow: 1;border-bottom:2px solid black;">{{$std->full_name}}</span>
-                </div>
-                 <br>
-                DATE OF BIRTH : {{$std->date_of_birth}} <br>
-                REGISTRATION NO. : {{$std->admission_no}} SYMBOL NO. : {{$std->roll_no}} GRADE : {{$std->class->class_name}} <br>
-                OF............................................................................................................................................................................................<br>
-            <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN.................... ARE GIVEN BELOW.</h4>
-        </div>
             <div class="col-md-12">
                 
             <table class="w-100 mt-30 mb-20 table table-bordered marksheet">
@@ -193,6 +192,8 @@
 
         </div> 
     </div>
+    <div class="fs"></div>
+    @endforeach
 </div>
 
 <script>
@@ -201,7 +202,7 @@
         var divToPrint=document.getElementById(id);
         var newWin=window.open('Report','_blank');
         newWin.document.open();
-        newWin.document.write('<html><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"><link rel="stylesheet" href="{{ asset("backEnd/css/print.css") }}"></head><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+        newWin.document.write('<html><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"><link rel="stylesheet" href="{{ asset("public/backEnd/css/print.css") }}"></head><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
         newWin.document.close();
 
     }

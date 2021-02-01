@@ -943,6 +943,17 @@ $(document).ready(function () {
         });
     });
 
+    $("#select_class1").change(function () {
+        var url = $('#url').val();
+
+        var formData = {
+            id: $(this).val()
+        };
+
+        // get section for student
+        
+    });
+
 });
 
 

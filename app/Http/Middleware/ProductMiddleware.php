@@ -21,19 +21,20 @@ class ProductMiddleware
     {
 
 
-       $client = new Client();
-        if (\Schema::hasTable('users')) {
-            $value = SmGeneralSettings::first();
-            $UserData = Envato::verifyPurchase($value);
-            if (!empty($UserData['verify-purchase']['item_id']) && (User::$item == $UserData['verify-purchase']['item_id'])) {  
-                Session::put('url', $request->path());
-                \Session::flash("message-danger", "Ops! Purchase Code is not vaild. Please try again.");
-                return redirect('verified-code');
-            }
-            return $next($request);
-        }else{
-            return redirect('install');
-        }
+    //    $client = new Client();
+    //     if (\Schema::hasTable('users')) {
+    //         $value = SmGeneralSettings::first();
+    //         $UserData = Envato::verifyPurchase($value);
+    //         if (!empty($UserData['verify-purchase']['item_id']) && (User::$item == $UserData['verify-purchase']['item_id'])) {  
+    //             Session::put('url', $request->path());
+    //             \Session::flash("message-danger", "Ops! Purchase Code is not vaild. Please try again.");
+    //             return redirect('verified-code');
+    //         }
+    //     }else{
+    //         return redirect('install');
+    //     }
+        // dd($request);
+        return $next($request);
         
         
 

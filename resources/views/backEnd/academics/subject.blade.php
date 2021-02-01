@@ -43,10 +43,10 @@
                         @if(isset($subject))
                         {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'subject_update', 'method' => 'POST']) }}
                         @else
-                        @if(in_array(258, App\GlobalVariable::GlobarModuleLinks()) || Auth::user()->role_id == 1 )
-      
-                        {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'subject_store', 'method' => 'POST']) }}
-                        @endif
+                            @if(in_array(258, App\GlobalVariable::GlobarModuleLinks()) || Auth::user()->role_id == 1 )
+        
+                            {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'subject_store', 'method' => 'POST']) }}
+                            @endif
                         @endif
                         <div class="white-box">
                             <div class="add-visitor">
@@ -88,11 +88,16 @@
                                             </div>
                                             @else
                                             <div class="mr-30">
-                                                <input type="radio" name="subject_type" id="relationFather" value="T" class="common-radio relationButton" checked>
+                                                <input type="radio" name="subject_type" id="relationFather" value="T" class="common-radio relationButton" checked onchange="
+                                                document.getElementById('identifire').style.display=this.checked?'none':'flex';
+                                            ">
                                                 <label for="relationFather">@lang('lang.theory')</label>
                                             </div>
                                             <div class="mr-30">
-                                                <input type="radio" name="subject_type" id="relationMother" value="P" class="common-radio relationButton">
+                                                <input type="radio" name="subject_type" id="relationMother" value="P" class="common-radio relationButton" onchange="
+                                                    document.getElementById('identifire').style.display=this.checked?'flex':'none';
+                                                    console.log('hkh');
+                                                ">
                                                 <label for="relationMother">@lang('lang.practical')</label>
                                             </div>
                                             @endif
@@ -108,6 +113,35 @@
                                             @if ($errors->has('subject_code'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('subject_code') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row  mt-40">
+                                    <div class="col-lg-12">
+                                        <div class="input-effect">
+                                            <input class="primary-input form-control{{ $errors->has('credit_hour') ? ' is-invalid' : '' }}" type="text" name="credit_hour" autocomplete="off" value="{{isset($subject)? $subject->credit_hour: ''}}">
+                                            <label>Credit Hour</label>
+                                            <span class="focus-border"></span>
+                                            @if ($errors->has('credit_hour'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('credit_hour') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-40" id="identifire" style="display: none;">
+                                    <div class="col-lg-12">
+                                        <div class="input-effect">
+                                            <input class="primary-input form-control{{ $errors->has('identifier') ? ' is-invalid' : '' }}" type="text" name="identifier" autocomplete="off" value="{{isset($subject)? $subject->identifier: ''}}">
+                                            <label>Subject Code For Theory</label>
+                                            <span class="focus-border"></span>
+                                            @if ($errors->has('credit_hour'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('credit_hour') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -177,6 +211,7 @@
                                     <th> @lang('lang.subject')</th>
                                     <th> @lang('lang.subject_type')</th>
                                     <th>@lang('lang.subject_code')</th>
+                                    <th>Credit Hour</th>
                                     <th>@lang('lang.action')</th>
                                 </tr>
                             </thead>
@@ -189,6 +224,7 @@
                                     <td>{{$subject->subject_name}}</td>
                                     <td>{{$subject->subject_type == 'T'? 'Theory':'Practical'}}</td>
                                     <td>{{$subject->subject_code}}</td>
+                                    <td>{{$subject->credit_hour}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">

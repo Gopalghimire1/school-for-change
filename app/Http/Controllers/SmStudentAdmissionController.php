@@ -1671,72 +1671,73 @@ class SmStudentAdmissionController extends Controller
     //studentReport modified by jmrashed
     public function studentReport(Request $request)
     {
-        $classes = SmClass::where('active_status', 1)->get();
-        $types = SmStudentCategory::all();
-        $genders = SmBaseSetup::where('active_status', '=', '1')->where('base_group_id', '=', '1')->get();
-
-        if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-            $data = [];
-            $data['classes'] = $classes->toArray();
-            $data['types'] = $types->toArray();
-            $data['genders'] = $genders->toArray();
-            return ApiBaseMethod::sendResponse($data, null);
-        }
-        return view('backEnd.studentInformation.student_report', compact('classes', 'types', 'genders'));
+        
     }
 
     //student report search modified by jmrashed
     public function studentReportSearch(Request $request)
     {
-        // $request->validate([
-        //     'class' => 'required'
-        // ]);
+        // dd($request);
+        if($request->isMethod('post')){
+            $students = SmStudent::query();
 
+            $students->where('active_status', 1);
+    
+            //if no class is selected
+            if ($request->class != "") {
+                $students->where('class_id', $request->class);
+            }
+            //if no section is selected
+            if ($request->section != "") {
+                $students->where('section_id', $request->section);
+            }
+            //if no student is category selected
+            if ($request->type != "") {
+                $students->where('student_category_id', $request->type);
+            }
+    
+            //if no gender is selected
+            if ($request->gender != "") {
+                $students->where('gender_id', $request->gender);
+            }
+            $students = $students->get();
+    
+            $classes = SmClass::where('active_status', 1)->get();
+            $types = SmStudentCategory::all();
+            $genders = SmBaseSetup::where('active_status', '=', '1')->where('base_group_id', '=', '1')->get();
+    
+            $class_id = $request->class;
+            $type_id = $request->type;
+            $gender_id = $request->gender;
+    
+            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
+                $data = [];
+                $data['students'] = $students->toArray();
+                $data['classes'] = $classes->toArray();
+                $data['types'] = $types->toArray();
+                $data['genders'] = $genders->toArray();
+                $data['class_id'] = $class_id;
+                $data['type_id'] = $type_id;
+                $data['gender_id'] = $gender_id;
+                return ApiBaseMethod::sendResponse($data, null);
+            }
+    
+            return view('backEnd.studentInformation.student_report', compact('students', 'classes', 'types', 'genders', 'class_id', 'type_id', 'gender_id'));
+        }else{
+            $classes = SmClass::where('active_status', 1)->get();
+            $types = SmStudentCategory::all();
+            $genders = SmBaseSetup::where('active_status', '=', '1')->where('base_group_id', '=', '1')->get();
 
-        $students = SmStudent::query();
-
-        $students->where('active_status', 1);
-
-        //if no class is selected
-        if ($request->class != "") {
-            $students->where('class_id', $request->class);
-        }
-        //if no section is selected
-        if ($request->section != "") {
-            $students->where('section_id', $request->section);
-        }
-        //if no student is category selected
-        if ($request->type != "") {
-            $students->where('student_category_id', $request->type);
-        }
-
-        //if no gender is selected
-        if ($request->gender != "") {
-            $students->where('gender_id', $request->gender);
-        }
-        $students = $students->get();
-
-        $classes = SmClass::where('active_status', 1)->get();
-        $types = SmStudentCategory::all();
-        $genders = SmBaseSetup::where('active_status', '=', '1')->where('base_group_id', '=', '1')->get();
-
-        $class_id = $request->class;
-        $type_id = $request->type;
-        $gender_id = $request->gender;
-
-        if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-            $data = [];
-            $data['students'] = $students->toArray();
-            $data['classes'] = $classes->toArray();
-            $data['types'] = $types->toArray();
-            $data['genders'] = $genders->toArray();
-            $data['class_id'] = $class_id;
-            $data['type_id'] = $type_id;
-            $data['gender_id'] = $gender_id;
-            return ApiBaseMethod::sendResponse($data, null);
-        }
-
-        return view('backEnd.studentInformation.student_report', compact('students', 'classes', 'types', 'genders', 'class_id', 'type_id', 'gender_id'));
+            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
+                $data = [];
+                $data['classes'] = $classes->toArray();
+                $data['types'] = $types->toArray();
+                $data['genders'] = $genders->toArray();
+                return ApiBaseMethod::sendResponse($data, null);
+            }
+            return view('backEnd.studentInformation.student_report', compact('classes', 'types', 'genders'));
+            }
+        
     }
 
     public function studentAttendanceReport(Request $request)

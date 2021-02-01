@@ -189,10 +189,9 @@ class SmExaminationController extends Controller
     //show exam type method from sm_exams_types table
     public function exam_type()
     {
-  
         $classes = SmClass::where('active_status', 1)->get();
         $exams_types = SmExamType::where('session_id',\App\SmSession::where('is_default',1)->select('id')->first()->id)->get();
-        return view('backEnd.examination.exam_type', compact('exams', 'classes', 'exams_types'));
+        return view('backEnd.examination.exam_type',compact('classes', 'exams_types'));
     }
 
     //edit exam type method from sm_exams_types table
@@ -233,16 +232,20 @@ class SmExaminationController extends Controller
     //store exam type method from sm_exams_types table
     public function exam_type_store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'exam_type_title' => 'required'
         ]);
 
 
+
+        // dd(\App\SmSession::where('is_default',1)->select('id')->first());
         $update_exame_type = new SmExamType();
         $update_exame_type->title = $request->exam_type_title;
         $update_exame_type->session_id = \App\SmSession::where('is_default',1)->select('id')->first()->id;
-
+        
         $update_exame_type->active_status = 1;
+        // dd($update_exame_type);
             //1 for status active & 0 for inactive
         $result = $update_exame_type->save();
 
@@ -1392,7 +1395,7 @@ class SmExaminationController extends Controller
             $data['classes'] = $classes->toArray();
             return ApiBaseMethod::sendResponse($data, null);
         }
-        return view('backEnd.reports.mark_sheet_report_student', compact('exams', 'classes'));
+        return view('backEnd.reports.multiple_student_report',['exams'=>$exams,'classes'=>$classes,'datas'=>[]] );
     }
 
 
@@ -1400,100 +1403,132 @@ class SmExaminationController extends Controller
 
     public function markSheetReportStudentSearch(Request $request)
     {
+        // dd($request->all());
 
-        $input = $request->all();
-        $validator = Validator::make($input, [
-            'exam' => 'required',
-            'class' => 'required',
-            'section' => 'required',
-            'student' => 'required'
-        ]);
+        $students=SmResultStore::where('exam_type_id',$request->exam)->where('class_id',$request->class)->where('section_id',$request->section)->where('student_id',$request->student)->first();
+                $datas=[];
+                // dd($student);
+                $data=[];
+                $data['std']=SmStudent::find($students['student_id']);
 
-        $input['exam_id'] = $request->exam;
-        $input['class_id'] = $request->class;
-        $input['section_id'] = $request->section;
-        $input['student_id'] = $request->student;
+                $marks=SmResultStore::where('exam_type_id',$request->exam)->where('student_id',$students['student_id'])->get();
+                $group=[];
+                foreach($marks as $mark){
+                    $sub=$mark->subject;
+                    if($sub->identifier!=null){
+                        if(!isset($group['mark_'.$sub->identifier])){
+                            $group['mark_'.$sub->identifier]=[];
+                        }
+                        array_push($group['mark_'.$sub->identifier],$mark);
+                    }else{
+                        if(!isset($group['mark_'.$sub->subject_code])){
+                            $group['mark_'.$sub->subject_code]=[];
+                        }
+                        array_push($group['mark_'.$sub->subject_code],$mark);
+                    }
+                }
 
+                $group1=[];
+                foreach ($group as $group_item) {
+                    $totalgp=0;
+                    $totalch=0;
+                    foreach($group_item as $item){
+                        $sub=$item->subject;
+                      
+                        $totalgp+=$item->total_gpa_point*$sub->credit_hour;
+                        $totalch+=$sub->credit_hour;
+                    }
 
+                    $group_item[0]->finalgrade=$totalgp/$totalch;
+                    $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
+                    $group_item[0]->finalgradel=$gpa->grade_name;
+                    $group_item[0]->gp=$totalgp;
+                    $group_item[0]->cp=$totalch;
+                    array_push($group1,$group_item);
+                }
+                $data['marks']=$group1;
+                array_push($datas,$data);
+                // for form to field
+                $exams = SmExamType::where('active_status', 1)->get();
+                $classes = SmClass::where('active_status', 1)->get();
+        
+                if (ApiBaseMethod::checkUrl($request->fullUrl())) {
+                    $data = [];
+                    $data['exams'] = $exams->toArray();
+                    $data['classes'] = $classes->toArray();
+                    return ApiBaseMethod::sendResponse($data, null);
+                }
 
-        if ($validator->fails()) {
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-                return ApiBaseMethod::sendError('Validation Error.', $validator->errors());
-            }
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-
-        $exams = SmExamType::where('active_status', 1)->get();
-        $classes        =   SmClass::where('active_status', 1)->get();
-        $exam_types     =   SmExamType::where('active_status', 1)->get();
-
-        $subjects = SmAssignSubject::where([['class_id', $request->class], ['section_id', $request->section]])->get();
-        $student_detail =   $studentDetails = SmStudent::find($request->student);
-        $section        =   SmSection::where('active_status', 1)->where('id', $request->section)->first();
-        $section_id     =   $request->section;
-        $class_id       =   $request->class;
-        $class_name     =   SmClass::find($class_id);
-        $exam_type_id   =   $request->exam;
-        $student_id     =   $request->student;
-        $exam_details     =   SmExamType::where('active_status', 1)->find($exam_type_id);
-
-
-
-        $is_result_available = SmResultStore::where([['class_id', $request->class], ['exam_type_id', $request->exam], ['section_id', $request->section], ['student_id', $request->student]])->get();
-
-        if ($is_result_available->count() > 0) {
-
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-                $data = [];
-                $data['exam_types'] = $exam_types->toArray();
-                $data['classes'] = $classes->toArray();
-                $data['studentDetails'] = $studentDetails;
-                $data['exams'] = $exams->toArray();
-                $data['subjects'] = $subjects->toArray();
-                $data['section'] = $section;
-                $data['class_id'] = $class_id;
-                $data['student_detail'] = $student_detail;
-                $data['is_result_available'] = $is_result_available;
-                $data['exam_type_id'] = $exam_type_id;
-                $data['section_id'] = $section_id;
-                $data['student_id'] = $student_id;
-                $data['exam_details'] = $exam_details;
-                $data['class_name'] = $class_name;
-                return ApiBaseMethod::sendResponse($data, null);
-            }
-            $student = $student_id;
-            return view('backEnd.reports.mark_sheet_report_student', compact('exam_types', 'classes', 'studentDetails', 'exams', 'classes', 'subjects', 'section', 'class_id', 'student_detail', 'is_result_available', 'exam_type_id', 'section_id', 'student_id', 'exam_details', 'class_name', 'input'));
-        } else {
-
-            if (ApiBaseMethod::checkUrl($request->fullUrl())) {
-                return ApiBaseMethod::sendError('Ops! Your result is not found! Please check mark register');
-            }
-            Toastr::error('Ops! Your result is not found! Please check mark register', 'Failed');
-            return redirect('mark-sheet-report-student');
-        }
-
-
-
-        $marks_register = SmMarksRegister::where('exam_id', $request->exam)->where('student_id', $request->student)->first();
-        // dd($marks_register);
-
-        $student_detail = SmStudent::where('id', $request->student)->first();
-        $subjects = SmAssignSubject::where('class_id', $request->class)->where('section_id', $request->section)->get();
-        $exams = SmExamType::where('active_status', 1)->get();
-        $classes = SmClass::where('active_status', 1)->get();
-        $grades = SmMarksGrade::where('active_status', 1)->get();
-        $class = SmClass::find($request->class);
-        $section = SmSection::find($request->section);
-        $exam_detail = SmExam::find($request->exam);
-        $exam_id = $request->exam;
-        $class_id = $request->class;
-
-
-
-        return view('backEnd.reports.mark_sheet_report_student', compact('exam_types', 'classes', 'studentDetails', 'exams', 'classes', 'marks_register', 'subjects', 'class', 'section', 'exam_detail', 'grades', 'exam_id', 'class_id', 'student_detail', 'input'));
+        return view('backEnd.reports.mark_sheet_report_student', compact('data','datas','exams','classes'));
     }
 
+
+
+    public function markSheetReportMultipleStudentSearch(Request $request){
+            if($request->student == null){
+            
+                $students=SmResultStore::where('exam_type_id',$request->exam)->where('class_id',$request->class)->where('section_id',$request->section)->select('student_id')->distinct()->get()->toArray();
+                $datas=[];
+                foreach($students as $student){
+                    // dd($student);
+                    $data=[];
+                    $data['std']=SmStudent::find($student['student_id']);
+    
+                    $marks=SmResultStore::where('exam_type_id',$request->exam)->where('student_id',$student['student_id'])->get();
+                    $group=[];
+                    foreach($marks as $mark){
+                        $sub=$mark->subject;
+                        if($sub->identifier!=null){
+                            if(!isset($group['mark_'.$sub->identifier])){
+                                $group['mark_'.$sub->identifier]=[];
+                            }
+                            array_push($group['mark_'.$sub->identifier],$mark);
+                        }else{
+                            if(!isset($group['mark_'.$sub->subject_code])){
+                                $group['mark_'.$sub->subject_code]=[];
+                            }
+                            array_push($group['mark_'.$sub->subject_code],$mark);
+                        }
+                    }
+    
+                    $group1=[];
+                    foreach ($group as $group_item) {
+                        $totalgp=0;
+                        $totalch=0;
+                        foreach($group_item as $item){
+                            $sub=$item->subject;
+                          
+                            $totalgp+=$item->total_gpa_point*$sub->credit_hour;
+                            $totalch+=$sub->credit_hour;
+                        }
+    
+                        $group_item[0]->finalgrade=$totalgp/$totalch;
+                        $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
+                        $group_item[0]->finalgradel=$gpa->grade_name;
+                        $group_item[0]->gp=$totalgp;
+                        $group_item[0]->cp=$totalch;
+                        array_push($group1,$group_item);
+                    }
+                    $data['marks']=$group1;
+                    array_push($datas,$data);
+                }
+                // for forms
+                $exams = SmExamType::where('active_status', 1)->get();
+                $classes = SmClass::where('active_status', 1)->get();
+
+                if (ApiBaseMethod::checkUrl($request->fullUrl())) {
+                    $data = [];
+                    $data['exams'] = $exams->toArray();
+                    $data['classes'] = $classes->toArray();
+                    return ApiBaseMethod::sendResponse($data, null);
+                }
+                return view('backEnd.reports.multiple_student_report',compact('datas','exams','classes'));
+    
+            }else{
+                return $this->markSheetReportStudentSearch($request);
+            }
+
+    }
 
     public function markSheetReportStudentPrint(Request $request)
     {
@@ -1547,4 +1582,6 @@ class SmExaminationController extends Controller
             return $pdf->stream('marks-sheet-of-' . $student_detail->full_name . '.pdf');
         }
     }
+
+
 }

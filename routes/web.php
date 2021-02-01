@@ -500,6 +500,7 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     //mark sheet report student
     Route::get('mark-sheet-report-student', ['as' => 'mark_sheet_report_student', 'uses' => 'SmExaminationController@markSheetReportStudent']);
     Route::post('mark-sheet-report-student', ['as' => 'mark_sheet_report_student', 'uses' => 'SmExaminationController@markSheetReportStudentSearch']);
+    Route::match(['POST','GET'],'mark-sheet-report-multiple-student', ['as' => 'mark_sheet_report_multiple_student', 'uses' => 'SmExaminationController@markSheetReportMultipleStudentSearch']);
 
 
     //user log
@@ -545,11 +546,11 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
 
     // Student Type Routes
 
-    Route::get('student-category', ['as' => 'student_category', 'uses' => 'SmStudentCategoryController@index']);
-    Route::post('student-category-store', ['as' => 'student_category_store', 'uses' => 'SmStudentCategoryController@store']);
-    Route::get('student-category-edit/{id}', ['as' => 'student_category_edit', 'uses' => 'SmStudentCategoryController@edit']);
-    Route::post('student-category-update', ['as' => 'student_category_update', 'uses' => 'SmStudentCategoryController@update']);
-    Route::get('student-category-delete/{id}', ['as' => 'student_category_delete', 'uses' => 'SmStudentCategoryController@delete']);
+    Route::get('student/category', ['as' => 'student_category', 'uses' => 'SmStudentCategoryController@index']);
+    Route::post('student/category/store', ['as' => 'student_category_store', 'uses' => 'SmStudentCategoryController@store']);
+    Route::get('student/category/edit/{id}', ['as' => 'student_category_edit', 'uses' => 'SmStudentCategoryController@edit']);
+    Route::post('student/category/update', ['as' => 'student_category_update', 'uses' => 'SmStudentCategoryController@update']);
+    Route::get('student/category/delete/{id}', ['as' => 'student_category_delete', 'uses' => 'SmStudentCategoryController@delete']);
 
     // Student Group Routes
 
@@ -872,8 +873,8 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
 
 
     // Student Module /Student Admission
-    Route::get('student-admission', ['as' => 'student_admission', 'uses' => 'SmStudentAdmissionController@admission']);
-    Route::post('student-admission-pic', ['as' => 'student_admission_pic', 'uses' => 'SmStudentAdmissionController@admissionPic']);
+    Route::get('student/admission', ['as' => 'student_admission', 'uses' => 'SmStudentAdmissionController@admission']);
+    Route::post('student/admission-pic', ['as' => 'student_admission_pic', 'uses' => 'SmStudentAdmissionController@admissionPic']);
 
     // Ajax get vehicle
     Route::get('/ajaxGetVehicle', 'SmStudentAdmissionController@ajaxGetVehicle');
@@ -942,7 +943,7 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     Route::get('ajaxSiblingInfoDetail', 'SmStudentAdmissionController@ajaxSiblingInfoDetail');
 
     // student list
-    Route::get('student-list', ['as' => 'student_list', 'uses' => 'SmStudentAdmissionController@studentDetails']);
+    Route::get('student/list', ['as' => 'student_list', 'uses' => 'SmStudentAdmissionController@studentDetails']);
     // student search
 
     Route::post('student-list-search', 'SmStudentAdmissionController@studentDetailsSearch');
@@ -961,7 +962,7 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     Route::post('student-update-pic/{id}', ['as' => 'student_update_pic', 'uses' => 'SmStudentAdmissionController@studentUpdatePic']);
 
     // Student Promote search
-    Route::get('student-promote', ['as' => 'student_promote', 'uses' => 'SmStudentAdmissionController@studentPromote']);
+    Route::get('student/promote', ['as' => 'student_promote', 'uses' => 'SmStudentAdmissionController@studentPromote']);
 
     Route::get('student-current-search', 'SmStudentAdmissionController@studentPromote');
     Route::post('student-current-search', 'SmStudentAdmissionController@studentCurrentSearch');
@@ -980,16 +981,16 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     Route::get('ajaxSelectStudent', 'SmStudentAdmissionController@ajaxSelectStudent');
 
     // Student Attendance
-    Route::get('student-attendance', ['as' => 'student_attendance', 'uses' => 'SmStudentAttendanceController@index']);
-    Route::post('student-search', 'SmStudentAttendanceController@studentSearch');
-    Route::get('student-search', 'SmStudentAttendanceController@index');
+    Route::get('student/attendance', ['as' => 'student_attendance', 'uses' => 'SmStudentAttendanceController@index']);
+    Route::post('student/search', 'SmStudentAttendanceController@studentSearch');
+    Route::get('student/search', 'SmStudentAttendanceController@index');
 
     Route::post('student-attendance-store', 'SmStudentAttendanceController@studentAttendanceStore');
     Route::post('student-attendance-holiday', 'SmStudentAttendanceController@studentAttendanceHoliday');
 
     //Student Report
-    Route::get('student-report', ['as' => 'student_report', 'uses' => 'SmStudentAdmissionController@studentReport']);
-    Route::post('student-report', ['as' => 'student_report', 'uses' => 'SmStudentAdmissionController@studentReportSearch']);
+    // Route::get('student-report', ['as' => 'student_report', 'uses' => 'SmStudentAdmissionController@studentReport']);
+    Route::match(['GET','POST'],'student/report', ['as' => 'student_report', 'uses' => 'SmStudentAdmissionController@studentReportSearch']);
 
 
     //guardian report
@@ -1019,7 +1020,7 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     Route::get('student-report-search', 'SmStudentAdmissionController@studentReport');
 
     // Student Attendance Report
-    Route::get('student-attendance-report', ['as' => 'student_attendance_report', 'uses' => 'SmStudentAdmissionController@studentAttendanceReport']);
+    Route::get('student/attendance/report', ['as' => 'student_attendance_report', 'uses' => 'SmStudentAdmissionController@studentAttendanceReport']);
 
     Route::post('student-attendance-report-search', ['as' => 'student_attendance_report_search', 'uses' => 'SmStudentAdmissionController@studentAttendanceReportSearch']);
     Route::get('student-attendance-report-search', 'SmStudentAdmissionController@studentAttendanceReport');

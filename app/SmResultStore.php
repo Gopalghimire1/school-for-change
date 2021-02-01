@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\SmMarkStore;
 class SmResultStore extends Model
 {
-    
+    public function subject(){
+        return $this->belongsTo(SmSubject::class,'subject_id','id');
+    }
     public function studentInfo(){
     	return $this->belongsTo('App\SmStudent', 'student_id', 'id');
     }

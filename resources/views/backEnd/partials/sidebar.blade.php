@@ -53,70 +53,71 @@
             @if(in_array(2, $main_modules))
 
             @if(@in_array(2, $modules) || Auth::user()->role_id == 1)
-                <li>
-                    <a href="#subMenuAdmin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <span class="flaticon-analytics"></span>
-                        @lang('lang.admin_section')
-                    </a>
-                    <ul class="collapse list-unstyled" id="subMenuAdmin">
-                        @if(@in_array(12, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{route('admission_query')}}">@lang('lang.admission_query')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(16, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{route('visitor')}}">@lang('lang.visitor_book') </a>
-                            </li>
-                        @endif
-                        @if(@in_array(21, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('complaint')}}">@lang('lang.complaint')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(27, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('postal-receive')}}">@lang('lang.postal_receive')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(32, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('postal-dispatch')}}">@lang('lang.postal_dispatch')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(36, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('phone-call')}}">@lang('lang.phone_call_log')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(41, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('setup-admin')}}">@lang('lang.admin_setup')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(49, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('student-certificate')}}">@lang('lang.student_certificate')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(53, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{route('generate_certificate')}}">@lang('lang.generate_certificate')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(45, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{url('student-id-card')}}">@lang('lang.student_id_card')</a>
-                            </li>
-                        @endif
-                        @if(@in_array(57, $module_links) || Auth::user()->role_id == 1)
-                            <li>
-                                <a href="{{route('generate_id_card')}}">@lang('lang.generate_id_card')</a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-
+           @if (env('tier',0)==1)
+           <li>
+               <a href="#subMenuAdmin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                   <span class="flaticon-analytics"></span>
+                   @lang('lang.admin_section')
+               </a>
+               <ul class="collapse list-unstyled" id="subMenuAdmin">
+                   @if(@in_array(12, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{route('admission_query')}}">@lang('lang.admission_query')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(16, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{route('visitor')}}">@lang('lang.visitor_book') </a>
+                       </li>
+                   @endif
+                   @if(@in_array(21, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('complaint')}}">@lang('lang.complaint')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(27, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('postal-receive')}}">@lang('lang.postal_receive')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(32, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('postal-dispatch')}}">@lang('lang.postal_dispatch')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(36, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('phone-call')}}">@lang('lang.phone_call_log')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(41, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('setup-admin')}}">@lang('lang.admin_setup')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(49, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('student-certificate')}}">@lang('lang.student_certificate')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(53, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{route('generate_certificate')}}">@lang('lang.generate_certificate')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(45, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{url('student-id-card')}}">@lang('lang.student_id_card')</a>
+                       </li>
+                   @endif
+                   @if(@in_array(57, $module_links) || Auth::user()->role_id == 1)
+                       <li>
+                           <a href="{{route('generate_id_card')}}">@lang('lang.generate_id_card')</a>
+                       </li>
+                   @endif
+               </ul>
+           </li>     
+            @endif
             @endif
             @endif
 
@@ -181,7 +182,7 @@
             @endif
 
 
-
+@if (env('tier',0)==1)
             @if(in_array(4, $main_modules))
             @if(@in_array(4, $modules) || Auth::user()->role_id == 1)
                 <li>
@@ -404,10 +405,10 @@
             @endif
             @endif
 
+@endif
+
+
             @if(in_array(9, $main_modules))
-
-
-
             @if(@in_array(9, $modules) || Auth::user()->role_id == 1)
                 <li>
                     <a href="#subMenuExam" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -474,9 +475,6 @@
             @endif
 
             @if(in_array(10, $main_modules))
-
-
-
             @if(@in_array(10, $modules) || Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
                 <li>
                     <a href="#subMenuAcademic" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -538,6 +536,8 @@
             @endif
             @endif
 
+
+@if (env('tier',0)==1)
             @if(in_array(11, $main_modules))
 
             @if(@in_array(11, $modules) || Auth::user()->role_id == 1)
@@ -775,7 +775,7 @@
                 </li>
             @endif
             @endif
-
+@endif
             @if(in_array(17, $main_modules))
 
             @if(@in_array(17, $modules) || Auth::user()->role_id == 1)
@@ -882,9 +882,10 @@
 
             @endif
 
+
+@if (env('tier',0)==1)
+        
             @if(in_array(18, $main_modules) || Auth::user()->role_id == 1)
-
-
             @if(@in_array(18, $modules) || Auth::user()->role_id == 1)
                 <li>
                     <a href="#subMenusystemSettings" data-toggle="collapse" aria-expanded="false"
@@ -935,7 +936,7 @@
 
 
                         @if(@in_array(121, $module_links) || Auth::user()->role_id == 1)
-{{--                            <li> <a href="{{route('base_group')}}">@lang('lang.base_group')</a> </li>--}}
+                             {{--                            <li> <a href="{{route('base_group')}}">@lang('lang.base_group')</a> </li>--}}
                         @endif
                         @if(@in_array(122, $module_links) || Auth::user()->role_id == 1)
                             <li>
@@ -1089,6 +1090,7 @@
             @endif
             @endif
         @endif
+@endif
 
     <!-- Student Panel -->
         @if(Auth::user()->role_id == 2)

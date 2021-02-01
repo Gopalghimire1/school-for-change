@@ -26,6 +26,7 @@ class SmSubjectController extends Controller
         }
         return view('backEnd.academics.subject', compact('subjects'));
     }
+
     public function store(Request $request)
     {
         $input = $request->all();
@@ -52,6 +53,8 @@ class SmSubjectController extends Controller
         $subject->subject_name = $request->subject_name;
         $subject->subject_type = $request->subject_type;
         $subject->subject_code = $request->subject_code;
+        $subject->credit_hour = $request->credit_hour;
+        $subject->identifier = $request->identifier;
         $result = $subject->save();
 
         if (ApiBaseMethod::checkUrl($request->fullUrl())) {
@@ -112,6 +115,7 @@ class SmSubjectController extends Controller
         $subject->subject_name = $request->subject_name;
         $subject->subject_type = $request->subject_type;
         $subject->subject_code = $request->subject_code;
+        $subject->credit_hour = $request->credit_hour;
         $result = $subject->save();
 
         if (ApiBaseMethod::checkUrl($request->fullUrl())) {

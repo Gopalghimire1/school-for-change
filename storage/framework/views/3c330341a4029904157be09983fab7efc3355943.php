@@ -49,7 +49,7 @@
                             document.getElementById('is_default').value=0;
                         }
                         "> Is Default ?
-                        <input type="hidden" name="is_default" id="is_default" <?php echo e($fiscal->is_default == 1? 'checked = "checked"' : ''); ?> >
+                        <input type="hidden" name="is_default" id="is_default" value="0">
                     </div>
 
                     <div class="form-group">

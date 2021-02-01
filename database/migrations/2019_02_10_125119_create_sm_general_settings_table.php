@@ -62,9 +62,9 @@ class CreateSmGeneralSettingsTable extends Migration
               'copyright_text'=>'Copyright &copy; 2019 All rights reserved | This template is made with <span class="ti-heart"> </span> by Codethemes',
               'logo'=>'public/uploads/settings/logo.png',
               'favicon'=>'public/uploads/settings/favicon.png',
-              'currency'=>'USD',
-              'school_name'=>'Infix Edu',
-              'site_title'=>'Infix Edu',
+              'currency'=>'NPR',
+              'school_name'=>'Smart Kalam',
+              'site_title'=>'Smart Kalam',
               'time_zone_id'=>51 
           ]
          ]); 

@@ -33,7 +33,7 @@
                         </div>
                         @endif
                     <div class="white-box">
-                        {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'url' => 'student-search', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_studentA']) }}
+                        {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'url' => 'student/search', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_studentA']) }}
                             <div class="row">
                                 <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
                                 <div class="col-lg-4 mt-30-md">
