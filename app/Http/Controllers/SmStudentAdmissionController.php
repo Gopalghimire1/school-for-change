@@ -435,10 +435,17 @@ class SmStudentAdmissionController extends Controller
     // simple type student add 
      public function newStudentStore(Request $request, $cls, $section){
          if($request->isMethod('post')){
-                $student = new SmStudent();
-                $student->role_id = 2;
+                // dd($request->all());
+                if(!$request->filled('id')){
+
+                    $student = new SmStudent();
+                    $student->role_id = 2;
+                }else{
+
+                    $student=SmStudent::find($request->id);
+                }
                 $student->full_name = $request->full_name;
-                $student->date_of_birth = $request->dob;
+                $student->nepali_dob = $request->dob;
                 $student->class_id = $cls;
                 $student->section_id = $section;
                 $student->roll_no = $request->roll;
@@ -447,12 +454,16 @@ class SmStudentAdmissionController extends Controller
             $ses = SmSession::where('is_default',1)->first();
             $student->session_id = $ses->id;
             $student->save();
-            Toastr::success('Operation successful', 'Success');
-            return redirect()->back();
+            return view('backEnd.academics.new_std_single',['std'=>$student]);
+
+            // Toastr::success('Operation successful', 'Success');
+            // return redirect()->back();
          }else{
              $classs_id = $cls;
              $section_id = $section;
-             return view('backEnd.academics.new_std',compact('classs_id','section_id'));
+
+             $students=SmStudent::where('section_id',$section)->where('class_id',$cls)->get();
+             return view('backEnd.academics.new_std',compact('classs_id','section_id','students'));
          }
      }
 

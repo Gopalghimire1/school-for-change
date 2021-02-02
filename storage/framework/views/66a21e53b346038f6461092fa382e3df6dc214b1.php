@@ -170,6 +170,7 @@
                                     <th><?php echo app('translator')->getFromJson('lang.class'); ?></th>
                                     <th><?php echo app('translator')->getFromJson('lang.section'); ?></th>
                                     <th><?php echo app('translator')->getFromJson('lang.action'); ?></th>
+                                    <th>Create Student</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -177,24 +178,23 @@
                                 <tr>
                                     <td valign="top"><?php echo e($class->class_name); ?></td>
                                     <td>
-                                        <table>
+                                        
                                             <?php
                                               $classSections = $class->classSection;  
                                             ?>
                                             <?php $__currentLoopData = $classSections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $classSection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr>
-                                                <td>
+                                            
+                                                
                                                     <?php $sectionName = App\SmSection::find($classSection->section_id);
                                                     ?>
                                                     <?php if($sectionName!=""): ?>
                                                         <?php echo e($sectionName->section_name); ?>
 
                                                     <?php endif; ?>
-                                                </td>
-                                            </tr>
+                                                
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                        </table>
+                                        
                                     </td>
                                     
                                     <td valign="top">
@@ -211,6 +211,7 @@
                                            <?php endif; ?>
                                             </div>
                                         </div>
+                                        <td><a href="<?php echo e(route('new_student_store',[$classSection->section_id,$classSection->section_id])); ?>" class="btn btn-link btn-sm">Manage Students </a></td>
                                     </td>
                                 </tr>
                                 

@@ -172,23 +172,23 @@
                                 <tr>
                                     <td valign="top">{{$class->class_name}}</td>
                                     <td>
-                                        <table>
+                                        {{-- <table> --}}
                                             @php
                                               $classSections = $class->classSection;  
                                             @endphp
                                             @foreach($classSections as $classSection)
-                                            <tr>
-                                                <td>
+                                            {{-- <tr> --}}
+                                                {{-- <td> --}}
                                                     @php $sectionName = App\SmSection::find($classSection->section_id);
                                                     @endphp
                                                     @if($sectionName!="")
                                                         {{$sectionName->section_name}}
                                                     @endif
-                                                </td>
-                                            </tr>
+                                                {{-- </td>
+                                            </tr> --}}
                                             @endforeach
 
-                                        </table>
+                                        {{-- </table> --}}
                                     </td>
                                     
                                     <td valign="top">
@@ -205,7 +205,7 @@
                                            @endif
                                             </div>
                                         </div>
-                                        <td><a href="{{ route('new_student_store',[$classSection->section_id,$classSection->section_id]) }}" class="btn btn-primary btn-sm">Add New Student</a></td>
+                                        <td><a href="{{ route('new_student_store',[$classSection->section_id,$classSection->section_id]) }}" class="btn btn-link btn-sm">Manage Students </a></td>
                                     </td>
                                 </tr>
                                 

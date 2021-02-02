@@ -53,70 +53,71 @@
             <?php if(in_array(2, $main_modules)): ?>
 
             <?php if(@in_array(2, $modules) || Auth::user()->role_id == 1): ?>
-                <li>
-                    <a href="#subMenuAdmin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <span class="flaticon-analytics"></span>
-                        <?php echo app('translator')->getFromJson('lang.admin_section'); ?>
-                    </a>
-                    <ul class="collapse list-unstyled" id="subMenuAdmin">
-                        <?php if(@in_array(12, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(route('admission_query')); ?>"><?php echo app('translator')->getFromJson('lang.admission_query'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(16, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(route('visitor')); ?>"><?php echo app('translator')->getFromJson('lang.visitor_book'); ?> </a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(21, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('complaint')); ?>"><?php echo app('translator')->getFromJson('lang.complaint'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(27, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('postal-receive')); ?>"><?php echo app('translator')->getFromJson('lang.postal_receive'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(32, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('postal-dispatch')); ?>"><?php echo app('translator')->getFromJson('lang.postal_dispatch'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(36, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('phone-call')); ?>"><?php echo app('translator')->getFromJson('lang.phone_call_log'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(41, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('setup-admin')); ?>"><?php echo app('translator')->getFromJson('lang.admin_setup'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(49, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('student-certificate')); ?>"><?php echo app('translator')->getFromJson('lang.student_certificate'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(53, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(route('generate_certificate')); ?>"><?php echo app('translator')->getFromJson('lang.generate_certificate'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(45, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(url('student-id-card')); ?>"><?php echo app('translator')->getFromJson('lang.student_id_card'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if(@in_array(57, $module_links) || Auth::user()->role_id == 1): ?>
-                            <li>
-                                <a href="<?php echo e(route('generate_id_card')); ?>"><?php echo app('translator')->getFromJson('lang.generate_id_card'); ?></a>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </li>
-
+           <?php if(env('tier',0)==1): ?>
+           <li>
+               <a href="#subMenuAdmin" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                   <span class="flaticon-analytics"></span>
+                   <?php echo app('translator')->getFromJson('lang.admin_section'); ?>
+               </a>
+               <ul class="collapse list-unstyled" id="subMenuAdmin">
+                   <?php if(@in_array(12, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(route('admission_query')); ?>"><?php echo app('translator')->getFromJson('lang.admission_query'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(16, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(route('visitor')); ?>"><?php echo app('translator')->getFromJson('lang.visitor_book'); ?> </a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(21, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('complaint')); ?>"><?php echo app('translator')->getFromJson('lang.complaint'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(27, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('postal-receive')); ?>"><?php echo app('translator')->getFromJson('lang.postal_receive'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(32, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('postal-dispatch')); ?>"><?php echo app('translator')->getFromJson('lang.postal_dispatch'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(36, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('phone-call')); ?>"><?php echo app('translator')->getFromJson('lang.phone_call_log'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(41, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('setup-admin')); ?>"><?php echo app('translator')->getFromJson('lang.admin_setup'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(49, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('student-certificate')); ?>"><?php echo app('translator')->getFromJson('lang.student_certificate'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(53, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(route('generate_certificate')); ?>"><?php echo app('translator')->getFromJson('lang.generate_certificate'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(45, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(url('student-id-card')); ?>"><?php echo app('translator')->getFromJson('lang.student_id_card'); ?></a>
+                       </li>
+                   <?php endif; ?>
+                   <?php if(@in_array(57, $module_links) || Auth::user()->role_id == 1): ?>
+                       <li>
+                           <a href="<?php echo e(route('generate_id_card')); ?>"><?php echo app('translator')->getFromJson('lang.generate_id_card'); ?></a>
+                       </li>
+                   <?php endif; ?>
+               </ul>
+           </li>     
+            <?php endif; ?>
             <?php endif; ?>
             <?php endif; ?>
 
@@ -181,7 +182,7 @@
             <?php endif; ?>
 
 
-
+<?php if(env('tier',0)==1): ?>
             <?php if(in_array(4, $main_modules)): ?>
             <?php if(@in_array(4, $modules) || Auth::user()->role_id == 1): ?>
                 <li>
@@ -404,10 +405,10 @@
             <?php endif; ?>
             <?php endif; ?>
 
+<?php endif; ?>
+
+
             <?php if(in_array(9, $main_modules)): ?>
-
-
-
             <?php if(@in_array(9, $modules) || Auth::user()->role_id == 1): ?>
                 <li>
                     <a href="#subMenuExam" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -470,9 +471,6 @@
             <?php endif; ?>
 
             <?php if(in_array(10, $main_modules)): ?>
-
-
-
             <?php if(@in_array(10, $modules) || Auth::user()->role_id == 1 || Auth::user()->role_id == 4): ?>
                 <li>
                     <a href="#subMenuAcademic" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -534,6 +532,8 @@
             <?php endif; ?>
             <?php endif; ?>
 
+
+<?php if(env('tier',0)==1): ?>
             <?php if(in_array(11, $main_modules)): ?>
 
             <?php if(@in_array(11, $modules) || Auth::user()->role_id == 1): ?>
@@ -765,7 +765,7 @@
                 </li>
             <?php endif; ?>
             <?php endif; ?>
-
+<?php endif; ?>
             <?php if(in_array(17, $main_modules)): ?>
 
             <?php if(@in_array(17, $modules) || Auth::user()->role_id == 1): ?>
@@ -872,9 +872,10 @@
 
             <?php endif; ?>
 
+
+<?php if(env('tier',0)==1): ?>
+        
             <?php if(in_array(18, $main_modules) || Auth::user()->role_id == 1): ?>
-
-
             <?php if(@in_array(18, $modules) || Auth::user()->role_id == 1): ?>
                 <li>
                     <a href="#subMenusystemSettings" data-toggle="collapse" aria-expanded="false"
@@ -925,7 +926,7 @@
 
 
                         <?php if(@in_array(121, $module_links) || Auth::user()->role_id == 1): ?>
-
+                             
                         <?php endif; ?>
                         <?php if(@in_array(122, $module_links) || Auth::user()->role_id == 1): ?>
                             <li>
@@ -1079,6 +1080,7 @@
             <?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
+<?php endif; ?>
 
     <!-- Student Panel -->
         <?php if(Auth::user()->role_id == 2): ?>

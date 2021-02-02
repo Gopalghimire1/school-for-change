@@ -50,7 +50,7 @@
                     <?php endif; ?>
                 <?php endif; ?>
                 <div class="white-box">
-                    <?php echo e(Form::open(['class' => 'form-horizontal', 'targer'=>'_blank','files' => true, 'route' => 'marks_register', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_student'])); ?>
+                    <?php echo e(Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'marks_register', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_student'])); ?>
 
                         <div class="row">
                             <input type="hidden" name="url" id="url" value="<?php echo e(URL::to('/')); ?>">

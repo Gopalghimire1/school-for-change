@@ -1,20 +1,19 @@
-@extends('backEnd.master')
-@section('mainContent')
+<?php $__env->startSection('mainContent'); ?>
 <section class="sms-breadcrumb mb-40 white-box">
     <div class="container-fluid">
         <div class="row justify-content-between">
             <h1>New Student</h1>
             <div class="bc-pages">
-                <a href="{{url('dashboard')}}">@lang('lang.dashboard')</a>
-                <a href="#">@lang('lang.academics')</a>
+                <a href="<?php echo e(url('dashboard')); ?>"><?php echo app('translator')->getFromJson('lang.dashboard'); ?></a>
+                <a href="#"><?php echo app('translator')->getFromJson('lang.academics'); ?></a>
                 <a href="#">New Student</a>
             </div>
         </div>
     </div>
 </section>
 
-<form action="{{ route('new_student_store',[$classs_id,$section_id])}}" method="POST" id="add_admission">
-@csrf
+<form action="<?php echo e(route('new_student_store',[$classs_id,$section_id])); ?>" method="POST" id="add_admission">
+<?php echo csrf_field(); ?>
 <div class="row">
     <div class="col-6">
         <div class="form-group">
@@ -40,15 +39,7 @@
                 <input type="text" name="dob" id="dob" class="form-control" >
             </div>
         </div>
-        {{-- <div class="col-12">
-            <div class="form-group">
-                <select name="session_id" class="form-control">
-                    @foreach ($session as $ses)
-                        <option value="{{ $ses->id }}">{{ $ses->session }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div> --}}
+        
         <div class="col-12">
             <span class="btn btn-primary btn-sm btn-block" onclick="addStudent()">Save Student</span>
         </div>
@@ -77,26 +68,30 @@
         </tr>
         <tbody id="students">
 
-            @foreach ($students as $std)
-            <tr id="std_{{$std->id}}" data-std="{{$std->toJson()}}">
+            <?php $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $std): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <tr id="std_<?php echo e($std->id); ?>" data-std="<?php echo e($std->toJson()); ?>">
                 <td>
-                    {{$std->admission_no}}
+                    <?php echo e($std->admission_no); ?>
+
                 </td>
                 <td>
-                    {{$std->roll_no}}
+                    <?php echo e($std->roll_no); ?>
+
                 </td>
                 <td>
-                    {{$std->full_name}}
+                    <?php echo e($std->full_name); ?>
+
                 </td>
                 <td>
-                    {{$std->nepali_dob}}
+                    <?php echo e($std->nepali_dob); ?>
+
                 </td>
                 <td>
-                    <span href="" class="btn btn-success btn-sm"  data-std="{{$std->toJson()}}" onclick="initEdit(this)">Edit</span>
+                    <span href="" class="btn btn-success btn-sm"  data-std="<?php echo e($std->toJson()); ?>" onclick="initEdit(this)">Edit</span>
                     <span href="" class="btn btn-danger btn-sm">Delete</span>
                 </td>
             </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
 </div>
@@ -110,8 +105,8 @@
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('new_student_store',[$classs_id,$section_id])}}" method="POST" id="edit_admission">
-                @csrf
+            <form action="<?php echo e(route('new_student_store',[$classs_id,$section_id])); ?>" method="POST" id="edit_admission">
+                <?php echo csrf_field(); ?>
                 <input type="hidden" name="id" id="e_id">
                 <div class="row">
                     <div class="col-6">
@@ -138,15 +133,7 @@
                                 <input type="text" name="dob" id="e_dob" class="form-control" >
                             </div>
                         </div>
-                        {{-- <div class="col-12">
-                            <div class="form-group">
-                                <select name="session_id" class="form-control">
-                                    @foreach ($session as $ses)
-                                        <option value="{{ $ses->id }}">{{ $ses->session }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
+                        
                        
                     </div>
                 </form>
@@ -159,9 +146,9 @@
     </div>
   </div>
 
-@endsection
-@section('script')
-    <script src="{{asset('public/backEnd/')}}/js/jquery.mask.min.js"></script>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('public/backEnd/')); ?>/js/jquery.mask.min.js"></script>
     <script>
         var lock=false;
 
@@ -237,4 +224,5 @@
 
         }
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('backEnd.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -43,11 +43,11 @@
                         <?php echo e(Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'subject_update', 'method' => 'POST'])); ?>
 
                         <?php else: ?>
-                        <?php if(in_array(258, App\GlobalVariable::GlobarModuleLinks()) || Auth::user()->role_id == 1 ): ?>
-      
-                        <?php echo e(Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'subject_store', 'method' => 'POST'])); ?>
+                            <?php if(in_array(258, App\GlobalVariable::GlobarModuleLinks()) || Auth::user()->role_id == 1 ): ?>
+        
+                            <?php echo e(Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'subject_store', 'method' => 'POST'])); ?>
 
-                        <?php endif; ?>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <div class="white-box">
                             <div class="add-visitor">
@@ -91,11 +91,16 @@
                                             </div>
                                             <?php else: ?>
                                             <div class="mr-30">
-                                                <input type="radio" name="subject_type" id="relationFather" value="T" class="common-radio relationButton" checked>
+                                                <input type="radio" name="subject_type" id="relationFather" value="T" class="common-radio relationButton" checked onchange="
+                                                document.getElementById('identifire').style.display=this.checked?'none':'flex';
+                                            ">
                                                 <label for="relationFather"><?php echo app('translator')->getFromJson('lang.theory'); ?></label>
                                             </div>
                                             <div class="mr-30">
-                                                <input type="radio" name="subject_type" id="relationMother" value="P" class="common-radio relationButton">
+                                                <input type="radio" name="subject_type" id="relationMother" value="P" class="common-radio relationButton" onchange="
+                                                    document.getElementById('identifire').style.display=this.checked?'flex':'none';
+                                                    console.log('hkh');
+                                                ">
                                                 <label for="relationMother"><?php echo app('translator')->getFromJson('lang.practical'); ?></label>
                                             </div>
                                             <?php endif; ?>
@@ -111,6 +116,35 @@
                                             <?php if($errors->has('subject_code')): ?>
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong><?php echo e($errors->first('subject_code')); ?></strong>
+                                                </span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row  mt-40">
+                                    <div class="col-lg-12">
+                                        <div class="input-effect">
+                                            <input class="primary-input form-control<?php echo e($errors->has('credit_hour') ? ' is-invalid' : ''); ?>" type="text" name="credit_hour" autocomplete="off" value="<?php echo e(isset($subject)? $subject->credit_hour: ''); ?>">
+                                            <label>Credit Hour</label>
+                                            <span class="focus-border"></span>
+                                            <?php if($errors->has('credit_hour')): ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($errors->first('credit_hour')); ?></strong>
+                                                </span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  mt-40" id="identifire" style="display: none;">
+                                    <div class="col-lg-12">
+                                        <div class="input-effect">
+                                            <input class="primary-input form-control<?php echo e($errors->has('identifier') ? ' is-invalid' : ''); ?>" type="text" name="identifier" autocomplete="off" value="<?php echo e(isset($subject)? $subject->identifier: ''); ?>">
+                                            <label>Subject Code For Theory</label>
+                                            <span class="focus-border"></span>
+                                            <?php if($errors->has('credit_hour')): ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($errors->first('credit_hour')); ?></strong>
                                                 </span>
                                             <?php endif; ?>
                                         </div>
@@ -183,6 +217,7 @@
                                     <th> <?php echo app('translator')->getFromJson('lang.subject'); ?></th>
                                     <th> <?php echo app('translator')->getFromJson('lang.subject_type'); ?></th>
                                     <th><?php echo app('translator')->getFromJson('lang.subject_code'); ?></th>
+                                    <th>Credit Hour</th>
                                     <th><?php echo app('translator')->getFromJson('lang.action'); ?></th>
                                 </tr>
                             </thead>
@@ -195,6 +230,7 @@
                                     <td><?php echo e($subject->subject_name); ?></td>
                                     <td><?php echo e($subject->subject_type == 'T'? 'Theory':'Practical'); ?></td>
                                     <td><?php echo e($subject->subject_code); ?></td>
+                                    <td><?php echo e($subject->credit_hour); ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
