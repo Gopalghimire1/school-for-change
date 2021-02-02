@@ -16,28 +16,28 @@
 <form action="{{ route('new_student_store',[$classs_id,$section_id])}}" method="POST">
 @csrf
 <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <label for="full">Symbol Number</label>
-                <input type="number" class="form-control" name="roll">
-            </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="full">Admission Number</label>
+            <input type="number" class="form-control" name="adm">
         </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label for="full">Admission Number</label>
-                <input type="number" class="form-control" name="adm">
-            </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group">
+            <label for="full">Symbol Number</label>
+            <input type="number" class="form-control" name="roll">
         </div>
+    </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="full">Full Name*</label>
-                <input type="text" class="form-control" name="full_name" required>
+                <input type="text" class="form-control" name="full_name" required placeholder="Name of Student">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="dob">Date Of Birth</label>
-                <input type="date" name="dob" class="form-control" required>
+                <input type="text" name="dob" id="dob" class="form-control" >
             </div>
         </div>
         {{-- <div class="col-12">
@@ -54,4 +54,12 @@
         </div>
     </div>
 </form>
+@endsection
+@section('script')
+    <script src="{{asset('public/backEnd/')}}/js/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#dob').mask('0000/00/00',{placeholder: "____/__/__"});
+        });
+    </script>
 @endsection
