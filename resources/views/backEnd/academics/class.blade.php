@@ -205,16 +205,17 @@
                                            @endif
                                             </div>
                                         </div>
-
+                                    </td>
                                         <td>
                                             @foreach($classSections as $classSection)
                                             {{-- <tr> --}}
                                                 {{-- <td> --}}
-                                                    @php $sectionName = App\SmSection::find($classSection->section_id);
+                                                    @php 
+                                                        $sectionName = App\SmSection::find($classSection->section_id);
                                                     @endphp
                                                     @if($sectionName!="")
                                                         
-                                                        <a href="{{ route('new_student_store',[$class->id,$classSection->section_id]) }}" class="btn btn-link btn-sm">Manage Students (  {{$sectionName->section_name}} )</a></td>
+                                                        <a href="{{ route('new_student_store',[$class->id,$classSection->section_id]) }}" class="btn btn-link btn-sm">Manage Students (  {{$sectionName->section_name}} )</a>
                                                     @endif
                                                 {{-- </td>
                                             </tr> --}}
