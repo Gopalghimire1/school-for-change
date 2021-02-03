@@ -182,7 +182,7 @@
                                                     @php $sectionName = App\SmSection::find($classSection->section_id);
                                                     @endphp
                                                     @if($sectionName!="")
-                                                        {{$sectionName->section_name}}
+                                                        {{$sectionName->section_name}} <br>
                                                     @endif
                                                 {{-- </td>
                                             </tr> --}}
@@ -205,7 +205,20 @@
                                            @endif
                                             </div>
                                         </div>
-                                        <td><a href="{{ route('new_student_store',[$classSection->section_id,$classSection->section_id]) }}" class="btn btn-link btn-sm">Manage Students </a></td>
+
+                                        <td>
+                                            @foreach($classSections as $classSection)
+                                            {{-- <tr> --}}
+                                                {{-- <td> --}}
+                                                    @php $sectionName = App\SmSection::find($classSection->section_id);
+                                                    @endphp
+                                                    @if($sectionName!="")
+                                                        
+                                                        <a href="{{ route('new_student_store',[$class->id,$classSection->section_id]) }}" class="btn btn-link btn-sm">Manage Students (  {{$sectionName->section_name}} )</a></td>
+                                                    @endif
+                                                {{-- </td>
+                                            </tr> --}}
+                                            @endforeach
                                     </td>
                                 </tr>
                                 
