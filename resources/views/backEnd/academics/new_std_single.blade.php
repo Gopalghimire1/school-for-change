@@ -1,6 +1,6 @@
 <tr id="std_{{$std->id}}" data-std="{{$std->toJson()}}">
     <td>
-        {{$std->admission_no}}
+        {{$std->regno}}
     </td>
     <td>
         {{$std->roll_no}}

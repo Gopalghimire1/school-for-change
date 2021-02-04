@@ -449,7 +449,7 @@ class SmStudentAdmissionController extends Controller
                 $student->class_id = $cls;
                 $student->section_id = $section;
                 $student->roll_no = $request->roll;
-                $student->admission_no = $request->adm;
+                $student->regno = $request->adm;
             // dd($student);
             $ses = SmSession::where('is_default',1)->first();
             $student->session_id = $ses->id;

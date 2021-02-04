@@ -127,40 +127,41 @@
         @endphp
         <div class="card-body" >
             <div class="row text-center mb-5">
-                <div class="col-md-2">
+                <div class="col-2">
                     logo
                 </div>
-                <div class="col-md-8">
-                    <h5>GOVERNMENT OF NEPAL</h5>
-                    <h5>NATIONAL EXAMINATIONS BOARD</h5>
-                    <h5 style="font-size:25px;">SCHOOL LEAVING CERTIFICATE EXAMINATION <br> GRADE-SHEET</h5>
+                <div class="col-8">
+                    <h3>{{NAme}}</h3>
+                   
+                    <h5 style="font-size:25px;">{{$address}} <br> GRADE-SHEET</h5>
                 </div>
-                <div class="col-md-2">
-                    logo
-                </div>
+
             </div>
             <div class="p-3">
                 <h5>
                     <div class="d-flex mb-1">
-                        <span>THE GRADE(S) SECURED BY : </span>
+                        <span>THE FOLLOWING ARE THE GRADE(S) OBTAINED BY:  </span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->full_name}}</span>
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->date_of_birth}}</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->date_of_birth}} BS</span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
-                        <span>REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->admission_no}}</span></span>
-                        <span>SYMBOL NO. : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->roll_no}}</span></span>
-                        <span>GRADE : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->class->class_name}}</span></span>
+                        <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->regno}}</span></span>
+                        <span style="flex:1;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
+                        <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
                     </div>
                     <div class="d-flex mb-1">
                         <span>OF</span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"></span>
                     </div>
                     <div class="d-flex mb-1">
-                        <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN</span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
+                        <span>IIN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$exam}} </span>
+                        <span>
+                            Bs
+                        </span>
                     </div>
                     <span>ARE GIVEN BELOW.</span>
                 </h5>

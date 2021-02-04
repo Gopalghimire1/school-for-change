@@ -18,8 +18,8 @@
 <div class="row">
     <div class="col-6">
         <div class="form-group">
-            <label for="full">Admission Number</label>
-            <input type="number" class="form-control" name="adm" id="admission_no">
+            <label for="full">Registraion Number</label>
+            <input type="number" class="form-control" name="adm" id="regno">
         </div>
     </div>
     <div class="col-6">
@@ -59,7 +59,7 @@
     <table class="table">
         <tr>
             <th>
-                Admission No
+                Registraion No
             </th>
             <th>
                 Symbolno
@@ -80,7 +80,7 @@
             @foreach ($students as $std)
             <tr id="std_{{$std->id}}" data-std="{{$std->toJson()}}">
                 <td>
-                    {{$std->admission_no}}
+                    {{$std->regno}}
                 </td>
                 <td>
                     {{$std->roll_no}}
@@ -186,7 +186,7 @@
             console.log(data.id);
             id=data.id;
             $('#e_id').val(data.id);
-            $('#e_admission_no').val(data.admission_no);
+            $('#e_admission_no').val(data.regno);
             $('#e_roll_no').val(data.roll_no);
             $('#e_dob').val(data.nepali_dob);
             $('#e_full_name').val(data.full_name);
