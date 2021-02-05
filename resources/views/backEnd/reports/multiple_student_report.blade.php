@@ -181,6 +181,9 @@
                 
                     <tbody>
 
+                        @php
+                            $tt=0;
+                        @endphp
                         @foreach ($data['marks'] as $dataitem)
                         @foreach ($dataitem as $item)
                         {{-- {{ dd($item) }} --}}
@@ -193,8 +196,14 @@
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->finalgradel }}</td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important"></td>
                         </tr>
+                        @php
+                            $tt+=1;
+                        @endphp
                         @endforeach
                         @endforeach
+                        @for ($i = $tt; $i < $15; $i++)
+                            <tr><td></td></tr>
+                        @endfor
                     </tbody>
                     <tfoot>
                         <tr>
