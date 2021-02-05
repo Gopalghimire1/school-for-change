@@ -188,13 +188,13 @@
                         @foreach ($dataitem as $item)
                         {{-- {{ dd($item) }} --}}
                         <tr style="border:none !important;">
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->subject->subject_code }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->subject->subject_name }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->subject->credit_hour }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->total_gpa_point }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->total_gpa_grade }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important">{{ $item->finalgradel }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black;  !important"></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->subject_code }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->subject_name }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->credit_hour }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->total_gpa_point }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->total_gpa_grade }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->finalgradel }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                         </tr>
                         @php
                             $tt+=1;
@@ -202,7 +202,7 @@
                         @endforeach
                         @endforeach
                         @for ($i = $tt; $i < 15; $i++)
-                            <tr><td></td></tr>
+                            <tr style="border:none !important;"><td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" colspan="7"></td></tr>
                         @endfor
                     </tbody>
                     <tfoot>
