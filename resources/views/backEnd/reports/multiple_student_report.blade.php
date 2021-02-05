@@ -201,7 +201,7 @@
                         @endphp
                         @endforeach
                         @endforeach
-                        @for ($i = $tt; $i < $15; $i++)
+                        @for ($i = $tt; $i < 15; $i++)
                             <tr><td></td></tr>
                         @endfor
                     </tbody>
