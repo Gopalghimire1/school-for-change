@@ -181,8 +181,8 @@
                 
                     <tbody>
 
-                        @foreach ($data['marks'] as $data)
-                        @foreach ($data as $item)
+                        @foreach ($data['marks'] as $dataitem)
+                        @foreach ($dataitem as $item)
                         {{-- {{ dd($item) }} --}}
                         <tr>
                             <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->subject->subject_code }}</td>
