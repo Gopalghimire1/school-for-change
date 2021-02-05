@@ -131,7 +131,7 @@
                     logo
                 </div>
                 <div class="col-8">
-                    <h3>{{NAme}}</h3>
+                    <h3>{{$name}}</h3>
                    
                     <h5 style="font-size:25px;">{{$address}} <br> GRADE-SHEET</h5>
                 </div>
