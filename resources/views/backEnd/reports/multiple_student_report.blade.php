@@ -155,7 +155,7 @@
                     
                     <div class="d-flex mb-1">
                         <span>IN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$exam->}} </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
                         <span>
                             Bs
                         </span>
