@@ -147,6 +147,7 @@ class SmStaffController extends Controller
 
         DB::beginTransaction();
         try {
+            
             $user = new User();
             $user->role_id = $request->role_id;
             $user->username = $request->email;

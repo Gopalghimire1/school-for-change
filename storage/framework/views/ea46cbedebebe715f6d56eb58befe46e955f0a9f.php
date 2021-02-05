@@ -50,6 +50,7 @@
     ">
         <label for="relationFather">For Single Student</label>
     </div>
+
     <div>
         <span class="primary-btn small fix-gr-bg" onclick="printDiv('printdiv');">Print</span>
     </div>
@@ -120,57 +121,55 @@
     <?php echo e(Form::close()); ?>
 
 </div>
-<div class="mt-4" id="printdiv">
-    <?php $__currentLoopData = $datas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="mt-4">
         <?php
             $std=$data['std'];
             // dd($std);
         ?>
-        <div class="card-body" >
-            <div class="row text-center mb-5">
-                <div class="col-2">
+        <div class="card-body" id="printdiv">
+            <div class="row text-center">
+                <div class="col-md-2">
                     logo
                 </div>
-                <div class="col-8">
-                    <h3><?php echo e(NAme); ?></h3>
-                   
-                    <h5 style="font-size:25px;"><?php echo e($address); ?> <br> GRADE-SHEET</h5>
+                <div class="col-md-8">
+                    <h5>GOVERNMENT OF NEPAL</h5>
+                    <h5>NATIONAL EXAMINATIONS BOARD</h5>
+                    <h5 style="font-size:25px;">SCHOOL LEAVING CERTIFICATE EXAMINATION <br> GRADE-SHEET</h5>
                 </div>
-
+                <div class="col-md-2">
+                    logo
+                </div>
             </div>
             <div class="p-3">
                 <h5>
                     <div class="d-flex mb-1">
-                        <span>THE FOLLOWING ARE THE GRADE(S) OBTAINED BY:  </span>
+                        <span>THE GRADE(S) SECURED BY : </span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->full_name); ?></span>
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->date_of_birth); ?> BS</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->date_of_birth); ?></span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
-                        <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->regno); ?></span></span>
-                        <span style="flex:1;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->roll_no); ?></span></span>
-                        <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->class->class_name); ?></span></span>
+                        <span>REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->admission_no); ?></span></span>
+                        <span>SYMBOL NO. : <span style="border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->roll_no); ?></span></span>
+                        <span>GRADE : <span style="border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->class->class_name); ?></span></span>
                     </div>
                     <div class="d-flex mb-1">
                         <span>OF</span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"></span>
                     </div>
                     <div class="d-flex mb-1">
-                        <span>IIN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($exam); ?> </span>
-                        <span>
-                            Bs
-                        </span>
+                        <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
                     </div>
                     <span>ARE GIVEN BELOW.</span>
                 </h5>
             </div>
-
+        
             <div class="col-md-12">
                 
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet">
                 <thead>
                     <tr>
                         <th>Code</th>
@@ -200,21 +199,15 @@
                     </tbody>
                 </thead>
             </table>
-            <div class="mt-5">PREPARED BY:</div>
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col-lg-12">
-                <div style="display: flex; justify-content: space-between">
-                    <span style="border-top:2px dotted black;padding-right:20px;">CHECKED BY</span>
-                    <span style="border-top:2px dotted black;padding-right:20px;">CONTROLLER OF EXAMINATIONS</span>
-                </div>
+                
                 </div>
             </div>
 
 
         </div> 
     </div>
-    <div class="fs"></div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
 
 <script>
@@ -223,10 +216,11 @@
         var divToPrint=document.getElementById(id);
         var newWin=window.open('Report','_blank');
         newWin.document.open();
-        newWin.document.write('<html><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"><link rel="stylesheet" href="<?php echo e(asset("public/backEnd/css/print.css")); ?>"></head><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+        newWin.document.write('<html><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"><link rel="stylesheet" href="<?php echo e(asset("backEnd/css/print.css")); ?>"></head><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
         newWin.document.close();
 
     }
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('backEnd.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

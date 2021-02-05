@@ -19,13 +19,13 @@
     <div class="col-6">
         <div class="form-group">
             <label for="full">Registraion Number</label>
-            <input type="number" class="form-control" name="adm" id="regno">
+            <input type="text" class="form-control" name="adm" id="regno">
         </div>
     </div>
     <div class="col-6">
         <div class="form-group">
             <label for="full">Symbol Number</label>
-            <input type="number" class="form-control" name="roll" id="roll_no" >
+            <input type="text" class="form-control" name="roll" id="roll_no" >
         </div>
     </div>
         <div class="col-6">
@@ -117,13 +117,13 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="full">Admission Number</label>
-                            <input type="number" class="form-control" name="adm" id="e_admission_no">
+                            <input type="text" class="form-control" name="adm" id="e_admission_no">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="full">Symbol Number</label>
-                            <input type="number" class="form-control" name="roll" id="e_roll_no" >
+                            <input type="text" class="form-control" name="roll" id="e_roll_no" >
                         </div>
                     </div>
                         <div class="col-6">

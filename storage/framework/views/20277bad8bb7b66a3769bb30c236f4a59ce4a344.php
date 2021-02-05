@@ -40,7 +40,7 @@
                     <?php endif; ?>
                 <?php endif; ?>
                 <div class="white-box">
-                    <?php echo e(Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'marks_register_create', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_subject'])); ?>
+                    <?php echo e(Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'marks_register_create', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_subject','target'=>'_blank'])); ?>
 
                         <div class="row">
                             <input type="hidden" name="url" id="url" value="<?php echo e(URL::to('/')); ?>">
