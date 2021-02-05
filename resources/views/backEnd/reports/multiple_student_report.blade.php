@@ -152,13 +152,10 @@
                         <span style="flex:1;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
                         <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
                     </div>
+                    
                     <div class="d-flex mb-1">
-                        <span>OF</span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"></span>
-                    </div>
-                    <div class="d-flex mb-1">
-                        <span>IIN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$exam}} </span>
+                        <span>IN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$exam->}} </span>
                         <span>
                             Bs
                         </span>
@@ -169,16 +166,16 @@
 
             <div class="col-md-12">
                 
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" style="height: 500vh;">
                 <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Subject</th>
-                        <th>Credit Hour</th>
-                        <th>Grade Point</th>
-                        <th>Grade</th>
-                        <th>Final Grade</th>
-                        <th>Remarks</th>
+                    <tr style="border:none;">
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Code</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Subject</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Credit Hour</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Grade Point</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Final Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Remarks</th>
                     </tr>
                     <tbody>
 
@@ -186,13 +183,13 @@
                         @foreach ($data as $item)
                         {{-- {{ dd($item) }} --}}
                         <tr>
-                            <td>{{ $item->subject->subject_code }}</td>
-                            <td>{{ $item->subject->subject_name }}</td>
-                            <td>{{ $item->subject->credit_hour }}</td>
-                            <td>{{ $item->total_gpa_point }}</td>
-                            <td>{{ $item->total_gpa_grade }}</td>
-                            <td>{{ $item->finalgradel }}</td>
-                            <td></td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->subject->subject_code }}</td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->subject->subject_name }}</td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->subject->credit_hour }}</td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->total_gpa_point }}</td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->total_gpa_grade }}</td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;">{{ $item->finalgradel }}</td>
+                            <td style="border-top:none;border-bottom:none;border-left:1px solid black;border-right:1px solid black;"></td>
                         </tr>
                         @endforeach
                         @endforeach
