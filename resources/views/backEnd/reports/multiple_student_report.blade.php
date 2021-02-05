@@ -166,7 +166,7 @@
 
             <div class="col-md-12">
                 
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" style="height: 500vh;">
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" >
                 <thead>
                     <tr style="border:none;">
                         <th style="border-left:1px solid black;border-right:1px solid black;">Code</th>
