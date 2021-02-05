@@ -137,8 +137,8 @@
                 <table class="display school-table school-table-style" cellspacing="0" width="100%" >
                     <thead>
                         <tr>
-                            <th rowspan="2" >Admission No.</th>
-                            <th rowspan="2" >Roll No.</th>
+                            <th rowspan="2" >Admission No./ Registration No</th>
+                            <th rowspan="2" >Roll No. / Symbol No</th>
                             <th rowspan="2" >Student</th>
                             <th colspan="{{$number_of_exam_parts}}"> {{$subjectNames->subject_name}}</th> 
                             <th rowspan="2">Is Absent</th>
@@ -157,7 +157,7 @@
                                 <input type="hidden" name="student_ids[]" value="{{$student->id}}">
                                 <input type="hidden" name="student_rolls[{{$student->id}}]" value="{{$student->roll_no}}">
                                 <input type="hidden" name="student_admissions[{{$student->id}}]" value="{{$student->admission_no}}">
-                                {{$student->admission_no}}
+                                {{$student->admission_no??$student->regno}}
                             </td>
                             <td>{{$student->roll_no}}</td>
                             <td>{{$student->full_name}}</td>
