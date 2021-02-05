@@ -1533,7 +1533,7 @@ class SmExaminationController extends Controller
 
                 $name=env('SCHOOL_NAME',"NAragram");
                 $address=env('SCHOOL_ADDRESS',"bIRATNAGAR");
-                return view('backEnd.reports.multiple_student_report',compact('datas','exams','classes'));
+                return view('backEnd.reports.multiple_student_report',compact('name','address','datas','exams','classes'));
     
             }else{
                 return $this->markSheetReportStudentSearch($request);
