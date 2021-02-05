@@ -177,6 +177,8 @@
                         <th style="border-left:1px solid black;border-right:1px solid black;">Final Grade</th>
                         <th style="border-left:1px solid black;border-right:1px solid black;">Remarks</th>
                     </tr>
+                </thead>
+                
                     <tbody>
 
                         @foreach ($data['marks'] as $data)
@@ -194,15 +196,45 @@
                         @endforeach
                         @endforeach
                     </tbody>
-                </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th colspan="3">
+                                GRADE POINT AVERAGE(GPA): {{$data['gpa']}}
+                            </th>
+                            
+                        </tr>
+                    </tfoot>
             </table>
+           
+           
             <div class="mt-5">PREPARED BY:</div>
+
             <div class="row mt-5">
-                <div class="col-lg-12">
-                <div style="display: flex; justify-content: space-between">
-                    <span style="border-top:2px dotted black;padding-right:20px;">CHECKED BY</span>
-                    <span style="border-top:2px dotted black;padding-right:20px;">CONTROLLER OF EXAMINATIONS</span>
+                <div class="col-6 text-center">
+                    <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+
+                    </span>
+                    <span>
+                        Class Teacher
+                    </span>
+                    
+
                 </div>
+                <div class="col-6 text-center">
+                    <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+
+                    </span>
+                    <span>
+                        HEAD MASTER/CAMPUS CHIEF
+                    </span>
                 </div>
             </div>
 
