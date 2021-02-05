@@ -207,7 +207,7 @@
                             <th></th>
                             <th></th>
                             <th colspan="3">
-                                GRADE POINT AVERAGE(GPA): {{$data['gpa']}}
+                                GRADE POINT AVERAGE(GPA): {{round($data['gpa'],2)}}
                             </th>
                             
                         </tr>
@@ -222,6 +222,7 @@
                     <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
 
                     </span>
+                    <br>
                     <span>
                         Class Teacher
                     </span>
@@ -232,6 +233,7 @@
                     <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
 
                     </span>
+                    <br>
                     <span>
                         HEAD MASTER/CAMPUS CHIEF
                     </span>
