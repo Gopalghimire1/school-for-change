@@ -168,44 +168,102 @@
         
             <div class="col-md-12">
                 
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet">
-                <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Subject</th>
-                        <th>Credit Hour</th>
-                        <th>Grade Point</th>
-                        <th>Grade</th>
-                        <th>Final Grade</th>
-                        <th>Remarks</th>
-                    </tr>
-                    <tbody>
-
-                        @foreach ($data['marks'] as $data)
-                        @foreach ($data as $item)
-                        {{-- {{ dd($item) }} --}}
-                        <tr>
-                            <td>{{ $item->subject->subject_code }}</td>
-                            <td>{{ $item->subject->subject_name }}</td>
-                            <td>{{ $item->subject->credit_hour }}</td>
-                            <td>{{ $item->total_gpa_point }}</td>
-                            <td>{{ $item->total_gpa_grade }}</td>
-                            <td>{{ $item->finalgradel }}</td>
-                            <td></td>
+                <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" >
+                    <thead>
+                        <tr style="border:none;">
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Code</th>
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Subject</th>
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Credit Hour</th>
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Grade Point</th>
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Grade</th>
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Final Grade</th>
+                            <th style="border-left:1px solid black;border-right:1px solid black;">Remarks</th>
                         </tr>
-                        @endforeach
-                        @endforeach
-                    </tbody>
-                </thead>
-            </table>
-            <div class="row">
-                <div class="col-lg-12">
-                
+                    </thead>
+                    
+                        <tbody>
+    
+                            @php
+                                $tt=0;
+                            @endphp
+                            @foreach ($data['marks'] as $dataitem)
+                            @foreach ($dataitem as $item)
+                            {{-- {{ dd($item) }} --}}
+                            <tr style="border:none !important;">
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->subject_code }}</td>
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->subject_name }}</td>
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->credit_hour }}</td>
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->total_gpa_point }}</td>
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->total_gpa_grade }}</td>
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->finalgradel }}</td>
+                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            </tr>
+                            @php
+                                $tt+=1;
+                            @endphp
+                            @endforeach
+                            @endforeach
+                            @for ($i = $tt; $i < 15; $i++)
+                                <tr style="border:none !important;">
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                </tr>
+                            @endfor
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>
+                                    
+                                </th>
+                                <th>
+                                    Total
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th colspan="3">
+                                    GRADE POINT AVERAGE(GPA): {{round($data['gpa'],2)}}
+                                </th>
+                                
+                            </tr>
+                        </tfoot>
+                </table>
+                <div class="mt-5">PREPARED BY:</div>
+
+                <div class="row mt-5">
+                    <div class="col-6 text-center">
+                        <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+    
+                        </span>
+                        <br>
+                        <span>
+                            Class Teacher
+                        </span>
+                        
+    
+                    </div>
+                    <div class="col-6 text-center">
+                        <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+    
+                        </span>
+                        <br>
+                        <span>
+                            HEAD MASTER/CAMPUS CHIEF
+                        </span>
+                    </div>
                 </div>
-            </div>
-
-
         </div> 
+        <div style="width:100%;display:inline-block;border-bottom:1px solid black;margin:2rem 0 0 0;"></div>
+        <div style="padding: 5px;">
+            NOTE: ONE CREDIT HOUR EQUALS 32 CLOCK HOURS. <br>
+          <span>TH = THEORY</span> <span style="margin-left: 4rem;">PR = PRACTICAL</span> <span style="margin-left: 4rem;">XC = EXPELLED</span> <br>
+          <span>ABS = ABSENT</span> <span style="margin-left: 4rem;">W = WITHHELD</span>
+        </div>
+    </div>
     </div>
 </div>
 

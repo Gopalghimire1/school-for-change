@@ -1429,17 +1429,24 @@ class SmExaminationController extends Controller
                 }
 
                 $group1=[];
+                $totalmaingp=0;
+                $totalmainch=0;
                 foreach ($group as $group_item) {
                     $totalgp=0;
+                    $totalsmgp=0;
                     $totalch=0;
+                    $c=0;
                     foreach($group_item as $item){
                         $sub=$item->subject;
-                      
+                        $totalsmgp+=$item->total_gpa_point;
                         $totalgp+=$item->total_gpa_point*$sub->credit_hour;
                         $totalch+=$sub->credit_hour;
+                        $totalmaingp+=$item->total_gpa_point*$sub->credit_hour;
+                        $totalmainch+=$sub->credit_hour;
+                        $c+=1;
                     }
 
-                    $group_item[0]->finalgrade=$totalgp/$totalch;
+                    $group_item[0]->finalgrade=$totalsmgp/$c;
                     $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
                     $group_item[0]->finalgradel=$gpa->grade_name;
                     $group_item[0]->gp=$totalgp;
@@ -1447,6 +1454,8 @@ class SmExaminationController extends Controller
                     array_push($group1,$group_item);
                 }
                 $data['marks']=$group1;
+                $data['gpa']=$totalmaingp/$totalmainch;
+
                 array_push($datas,$data);
                 // for form to field
                 $exams = SmExamType::where('active_status', 1)->get();

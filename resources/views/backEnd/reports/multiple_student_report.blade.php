@@ -174,7 +174,7 @@
                 <thead>
                     <tr style="border:none;">
                         <th style="border-left:1px solid black;border-right:1px solid black;">Code</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;">Subject</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black; width: 300px;">Subject</th>
                         <th style="border-left:1px solid black;border-right:1px solid black;">Credit Hour</th>
                         <th style="border-left:1px solid black;border-right:1px solid black;">Grade Point</th>
                         <th style="border-left:1px solid black;border-right:1px solid black;">Grade</th>
@@ -260,9 +260,13 @@
                     </span>
                 </div>
             </div>
-
-
         </div> 
+        <div style="width:100%;display:inline-block;border-bottom:1px solid black;margin:2rem 0 0 0;"></div>
+        <div style="padding: 5px;">
+            NOTE: ONE CREDIT HOUR EQUALS 32 CLOCK HOURS. <br>
+          <span>TH = THEORY</span> <span style="margin-left: 4rem;">PR = PRACTICAL</span> <span style="margin-left: 4rem;">XC = EXPELLED</span> <br>
+          <span>ABS = ABSENT</span> <span style="margin-left: 4rem;">W = WITHHELD</span>
+        </div>
     </div>
     <div class="fs"></div>
     @endforeach

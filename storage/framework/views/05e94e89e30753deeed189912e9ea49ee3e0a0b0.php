@@ -128,40 +128,43 @@
         ?>
         <div class="card-body" >
             <div class="row text-center mb-5">
-                <div class="col-md-2">
+                <div class="col-2">
                     logo
                 </div>
-                <div class="col-md-8">
-                    <h5>GOVERNMENT OF NEPAL</h5>
-                    <h5>NATIONAL EXAMINATIONS BOARD</h5>
-                    <h5 style="font-size:25px;">SCHOOL LEAVING CERTIFICATE EXAMINATION <br> GRADE-SHEET</h5>
+                <div class="col-8">
+                    <h3 style="font-size:25px;">
+                        <?php echo e($name); ?>
+
+                        <br>
+                        <?php echo e($address); ?> 
+                    </h3>
+                   
+                    <h5 style="padding-top:20px;"> GRADE-SHEET</h5>
                 </div>
-                <div class="col-md-2">
-                    logo
-                </div>
+
             </div>
             <div class="p-3">
                 <h5>
                     <div class="d-flex mb-1">
-                        <span>THE GRADE(S) SECURED BY : </span>
+                        <span>THE FOLLOWING ARE THE GRADE(S) OBTAINED BY:  </span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->full_name); ?></span>
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->date_of_birth); ?></span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->date_of_birth); ?> BS</span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
-                        <span>REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->admission_no); ?></span></span>
-                        <span>SYMBOL NO. : <span style="border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->roll_no); ?></span></span>
-                        <span>GRADE : <span style="border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->class->class_name); ?></span></span>
+                        <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->regno); ?></span></span>
+                        <span style="flex:1;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->roll_no); ?></span></span>
+                        <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->class->class_name); ?></span></span>
                     </div>
+                    
                     <div class="d-flex mb-1">
-                        <span>OF</span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"></span>
-                    </div>
-                    <div class="d-flex mb-1">
-                        <span>IN THE EXAMINATION CONDUCTED BY THE NATIONAL EXAMINATIONS BOARD IN</span>
+                        <span>IN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
+                        <span>
+                            Bs
+                        </span>
                     </div>
                     <span>ARE GIVEN BELOW.</span>
                 </h5>
@@ -169,48 +172,104 @@
 
             <div class="col-md-12">
                 
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" >
                 <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Subject</th>
-                        <th>Credit Hour</th>
-                        <th>Grade Point</th>
-                        <th>Grade</th>
-                        <th>Final Grade</th>
-                        <th>Remarks</th>
+                    <tr style="border:none;">
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Code</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black; width: 300px;">Subject</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Credit Hour</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Grade Point</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Final Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Remarks</th>
                     </tr>
+                </thead>
+                
                     <tbody>
 
-                        <?php $__currentLoopData = $data['marks']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php
+                            $tt=0;
+                        ?>
+                        <?php $__currentLoopData = $data['marks']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dataitem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $dataitem; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         
-                        <tr>
-                            <td><?php echo e($item->subject->subject_code); ?></td>
-                            <td><?php echo e($item->subject->subject_name); ?></td>
-                            <td><?php echo e($item->subject->credit_hour); ?></td>
-                            <td><?php echo e($item->total_gpa_point); ?></td>
-                            <td><?php echo e($item->total_gpa_grade); ?></td>
-                            <td><?php echo e($item->finalgradel); ?></td>
-                            <td></td>
+                        <tr style="border:none !important;">
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->subject->subject_code); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->subject->subject_name); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->subject->credit_hour); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->total_gpa_point); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->total_gpa_grade); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->finalgradel); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                         </tr>
+                        <?php
+                            $tt+=1;
+                        ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php for($i = $tt; $i < 15; $i++): ?>
+                            <tr style="border:none !important;">
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            </tr>
+                        <?php endfor; ?>
                     </tbody>
-                </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th colspan="3">
+                                GRADE POINT AVERAGE(GPA): <?php echo e(round($data['gpa'],2)); ?>
+
+                            </th>
+                            
+                        </tr>
+                    </tfoot>
             </table>
+           
+           
             <div class="mt-5">PREPARED BY:</div>
+
             <div class="row mt-5">
-                <div class="col-lg-12">
-                <div style="display: flex; justify-content: space-between">
-                    <span style="border-top:2px dotted black;padding-right:20px;">CHECKED BY</span>
-                    <span style="border-top:2px dotted black;padding-right:20px;">CONTROLLER OF EXAMINATIONS</span>
+                <div class="col-6 text-center">
+                    <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+
+                    </span>
+                    <br>
+                    <span>
+                        Class Teacher
+                    </span>
+                    
+
                 </div>
+                <div class="col-6 text-center">
+                    <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+
+                    </span>
+                    <br>
+                    <span>
+                        HEAD MASTER/CAMPUS CHIEF
+                    </span>
                 </div>
             </div>
-
-
         </div> 
+        <div style="width:100%;display:inline-block;border-bottom:1px solid black;margin:2rem 0 0 0;"></div>
+        <div style="padding: 5px;">
+            NOTE: ONE CREDIT HOUR EQUALS 32 CLOCK HOURS. <br>
+          <span>TH = THEORY</span> <span style="margin-left: 4rem;">PR = PRACTICAL</span> <span style="margin-left: 4rem;">XC = EXPELLED</span> <br>
+          <span>ABS = ABSENT</span> <span style="margin-left: 4rem;">W = WITHHELD</span>
+        </div>
     </div>
     <div class="fs"></div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

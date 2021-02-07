@@ -178,24 +178,22 @@
                                 <tr>
                                     <td valign="top"><?php echo e($class->class_name); ?></td>
                                     <td>
-                                        <table>
+                                        
                                             <?php
                                               $classSections = $class->classSection;  
                                             ?>
                                             <?php $__currentLoopData = $classSections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $classSection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr>
-                                                <td>
+                                            
+                                                
                                                     <?php $sectionName = App\SmSection::find($classSection->section_id);
                                                     ?>
                                                     <?php if($sectionName!=""): ?>
-                                                        <?php echo e($sectionName->section_name); ?>
-
+                                                        <?php echo e($sectionName->section_name); ?> <br>
                                                     <?php endif; ?>
-                                                </td>
-                                            </tr>
+                                                
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                        </table>
+                                        
                                     </td>
                                     
                                     <td valign="top">
@@ -212,7 +210,20 @@
                                            <?php endif; ?>
                                             </div>
                                         </div>
-                                        <td><a href="<?php echo e(route('new_student_store',[$classSection->section_id,$classSection->section_id])); ?>" class="btn btn-primary btn-sm">Add New Student</a></td>
+                                    </td>
+                                        <td>
+                                            <?php $__currentLoopData = $classSections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $classSection): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            
+                                                
+                                                    <?php 
+                                                        $sectionName = App\SmSection::find($classSection->section_id);
+                                                    ?>
+                                                    <?php if($sectionName!=""): ?>
+                                                        
+                                                        <a href="<?php echo e(route('new_student_store',[$class->id,$classSection->section_id])); ?>" class="btn btn-link btn-sm">Manage Students (  <?php echo e($sectionName->section_name); ?> )</a>
+                                                    <?php endif; ?>
+                                                
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </td>
                                 </tr>
                                 
