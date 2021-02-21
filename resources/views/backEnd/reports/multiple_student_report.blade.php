@@ -149,7 +149,7 @@
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->date_of_birth}} BS</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->nepali_dob}} BS</span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
                         <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->regno}}</span></span>
