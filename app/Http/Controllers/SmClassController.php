@@ -123,7 +123,7 @@ class SmClassController extends Controller
             return ApiBaseMethod::sendResponse($data, null);
         }
 
-        return view('backEnd.academics.class', compact('classById', 'classes', 'sections', 'sectionId', 'className'));
+        return view('backEnd.academics.class', compact('classById', 'classes', 'sections', 'sectionId'));
     }
 
     public function update(Request $request)
