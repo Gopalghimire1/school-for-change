@@ -119,18 +119,19 @@
         </div>
     {{ Form::close() }}
 </div>
-<div class="mt-4" id="printdiv">
+<div class="mt-4" id="printdiv" >
+
     @foreach ($datas as $data)
         @php
             $std=$data['std'];
             // dd($std);
         @endphp
-        <div class="card-body" >
+        <div class="card-body" style="border:2px rgb(0, 0, 0) solid; padding:1rem;height:{{env('printheight','1350px')}};">
             <div class="row text-center mb-5">
                 <div class="col-2">
-                    logo
+                    <img src="{{ asset('public/logo.png') }}" alt="" style="width: 200px;">
                 </div>
-                <div class="col-8">
+                <div class="col-8 pt-4">
                     <h3 style="font-size:25px;">
                         {{$name}}
                         <br>

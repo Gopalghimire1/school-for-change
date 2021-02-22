@@ -120,18 +120,19 @@
     <?php echo e(Form::close()); ?>
 
 </div>
-<div class="mt-4" id="printdiv">
+<div class="mt-4" id="printdiv" >
+
     <?php $__currentLoopData = $datas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php
             $std=$data['std'];
             // dd($std);
         ?>
-        <div class="card-body" >
+        <div class="card-body" style="border:2px rgb(0, 0, 0) solid; padding:1rem;height:<?php echo e(env('printheight','1350px')); ?>;">
             <div class="row text-center mb-5">
                 <div class="col-2">
-                    logo
+                    <img src="<?php echo e(asset('public/logo.png')); ?>" alt="" style="width: 200px;">
                 </div>
-                <div class="col-8">
+                <div class="col-8 pt-4">
                     <h3 style="font-size:25px;">
                         <?php echo e($name); ?>
 
@@ -151,7 +152,7 @@
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->date_of_birth); ?> BS</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->nepali_dob); ?> BS</span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
                         <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->regno); ?></span></span>
