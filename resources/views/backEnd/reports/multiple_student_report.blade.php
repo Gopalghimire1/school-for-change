@@ -154,8 +154,8 @@
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
                         <span style="flex:2;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 25px;">{{$std->regno}}</span></span>
-                        <span style="flex:2;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
-                        <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
+                        <span style="flex:2;text-align:center;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
+                        <span style="flex:1;text-align:right;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
                     </div>
                     
                     <div class="d-flex mb-1">
