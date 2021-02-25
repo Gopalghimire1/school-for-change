@@ -153,9 +153,9 @@
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;">{{$std->nepali_dob}} BS </span></span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
-                        <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->regno}}</span></span>
-                        <span style="flex:1;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
-                        <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
+                        <span style="flex:1;" class="mr-5">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->regno}}</span></span>
+                        <span style="flex:1;" >SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
+                        <span style="flex:1;" >GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
                     </div>
                     
                     <div class="d-flex mb-1">
