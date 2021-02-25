@@ -131,7 +131,7 @@
                 <div class="col-2">
                     <img src="{{ asset('public/logo.png') }}" alt="" style="width: 200px;">
                 </div>
-                <div class="col-8 pt-4">
+                <div class="col-10 pt-5">
                     <h3 style="font-size:28px;">
                         <strong>{{$name}}</strong>
                         <br>
@@ -160,7 +160,7 @@
                     
                     <div class="d-flex mb-1">
                         <span>IN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">  </span>
                         <span>
                             Bs
                         </span>
