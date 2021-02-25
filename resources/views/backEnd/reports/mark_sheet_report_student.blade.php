@@ -120,34 +120,36 @@
         </div>
     {{ Form::close() }}
 </div>
-<div class="mt-4">
+<div class="mt-4" id="printdiv">
         @php
             $std=$data['std'];
             // dd($std);
         @endphp
-        <div class="card-body" id="printdiv">
-            <div class="row text-center">
-                <div class="col-md-2">
-                    logo
+        <div class="card-body" style="border:2px rgb(0, 0, 0) solid; padding:1rem;height:{{env('printheight','1350px')}};">
+            <div class="row text-center mb-5">
+                <div class="col-2">
+                    <img src="{{ asset('public/logo.png') }}" alt="" style="width: 200px;">
                 </div>
-                <div class="col-md-8">
-                    <h5>GOVERNMENT OF NEPAL</h5>
-                    <h5>NATIONAL EXAMINATIONS BOARD</h5>
-                    <h5 style="font-size:25px;">SCHOOL LEAVING CERTIFICATE EXAMINATION <br> GRADE-SHEET</h5>
+                <div class="col-8 pt-4">
+                    <h3 style="font-size:28px;">
+                        <strong>{{ env('SCHOOL_NAME')}}</strong>
+                        <br>
+                        <strong>{{env('SCHOOL_ADDRESS')}}</strong> 
+                    </h3>
+                   
+                    <h5 style="padding-top:20px;"> <strong>GRADE-SHEET</strong></h5>
                 </div>
-                <div class="col-md-2">
-                    logo
-                </div>
+
             </div>
             <div class="p-3">
                 <h5>
                     <div class="d-flex mb-1">
                         <span>THE GRADE(S) SECURED BY : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->full_name}}</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;">{{$std->full_name}}</span></span>
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">{{$std->nepali_dob}}</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;">{{$std->nepali_dob}}</span></span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
                         <span>REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding-right:20px;">{{$std->admission_no}}</span></span>
@@ -232,7 +234,7 @@
                             </tr>
                         </tfoot>
                 </table>
-                <div class="mt-5">PREPARED BY:</div>
+               <div style="margin-top:5rem; visibility: hidden;">hello</div>
 
                 <div class="row mt-5">
                     <div class="col-6 text-center">
@@ -241,7 +243,7 @@
                         </span>
                         <br>
                         <span>
-                            Class Teacher
+                            PREPARED BY
                         </span>
                         
     
@@ -255,6 +257,10 @@
                             HEAD MASTER/CAMPUS CHIEF
                         </span>
                     </div>
+                </div>
+
+                <div class="issued mt-3">
+                    Issued Date : {{ date('Y-m-d') }}
                 </div>
         </div> 
         <div style="width:100%;display:inline-block;border-bottom:1px solid black;margin:2rem 0 0 0;"></div>

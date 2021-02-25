@@ -133,14 +133,13 @@
                     <img src="<?php echo e(asset('public/logo.png')); ?>" alt="" style="width: 200px;">
                 </div>
                 <div class="col-8 pt-4">
-                    <h3 style="font-size:25px;">
-                        <?php echo e($name); ?>
-
+                    <h3 style="font-size:28px;">
+                        <strong><?php echo e($name); ?></strong>
                         <br>
-                        <?php echo e($address); ?> 
+                        <strong><?php echo e($address); ?></strong> 
                     </h3>
                    
-                    <h5 style="padding-top:20px;"> GRADE-SHEET</h5>
+                    <h5 style="padding-top:20px;"> <strong>GRADE-SHEET</strong></h5>
                 </div>
 
             </div>
@@ -148,11 +147,11 @@
                 <h5>
                     <div class="d-flex mb-1">
                         <span>THE FOLLOWING ARE THE GRADE(S) OBTAINED BY:  </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->full_name); ?></span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;"><?php echo e($std->full_name); ?></span></span>
                     </div>
                     <div class="d-flex mb-1">
                         <span> DATE OF BIRTH : </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><?php echo e($std->nepali_dob); ?> BS</span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;"><?php echo e($std->nepali_dob); ?> BS </span></span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
                         <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->regno); ?></span></span>
@@ -240,7 +239,7 @@
             </table>
            
            
-            <div class="mt-5">PREPARED BY:</div>
+            <div style="margin-top:5rem; visibility: hidden;">hello</div>
 
             <div class="row mt-5">
                 <div class="col-6 text-center">
@@ -249,7 +248,7 @@
                     </span>
                     <br>
                     <span>
-                        Class Teacher
+                        PREPARED BY
                     </span>
                     
 
@@ -263,6 +262,12 @@
                         HEAD MASTER/CAMPUS CHIEF
                     </span>
                 </div>
+            </div>
+
+
+            <div class="issued mt-3">
+                Issued Date : <?php echo e(date('Y-m-d')); ?>
+
             </div>
         </div> 
         <div style="width:100%;display:inline-block;border-bottom:1px solid black;margin:2rem 0 0 0;"></div>
