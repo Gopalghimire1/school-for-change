@@ -131,7 +131,7 @@
                 <div class="col-2">
                     <img src="{{ asset('public/logo.png') }}" alt="" style="width: 200px;">
                 </div>
-                <div class="col-10 pt-5">
+                <div class="col-10 pt-4">
                     <h3 style="font-size:28px;">
                         <strong>{{$name}}</strong>
                         <br>
