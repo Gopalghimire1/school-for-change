@@ -157,10 +157,13 @@
                         <span style="flex:2;text-align:center;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->roll_no}}</span></span>
                         <span style="flex:1;text-align:right;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;">{{$std->class->class_name}}</span></span>
                     </div>
+                    @php
+                     $ses = \App\SmSession::where('is_default',1)->first();  
+                    @endphp
                     
                     <div class="d-flex mb-1">
                         <span>IN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;">  </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;"> {{$ses->session}} </span></span>
                         <span>
                             Bs
                         </span>

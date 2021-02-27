@@ -132,7 +132,7 @@
                 <div class="col-2">
                     <img src="<?php echo e(asset('public/logo.png')); ?>" alt="" style="width: 200px;">
                 </div>
-                <div class="col-8 pt-4">
+                <div class="col-10 pt-4">
                     <h3 style="font-size:28px;">
                         <strong><?php echo e($name); ?></strong>
                         <br>
@@ -154,14 +154,17 @@
                         <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;"><?php echo e($std->nepali_dob); ?> BS </span></span>
                     </div>
                     <div class="mb-1" style="display: flex; justify-content: space-between">
-                        <span style="flex:1;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->regno); ?></span></span>
-                        <span style="flex:1;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->roll_no); ?></span></span>
-                        <span style="flex:1;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->class->class_name); ?></span></span>
+                        <span style="flex:2;">REGISTRATION NO. : <span style="border-bottom:2px dotted black;padding:0px 25px;"><?php echo e($std->regno); ?></span></span>
+                        <span style="flex:2;text-align:center;">SYMBOL NO. : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->roll_no); ?></span></span>
+                        <span style="flex:1;text-align:right;">GRADE : <span style="border-bottom:2px dotted black;padding:0px 20px;"><?php echo e($std->class->class_name); ?></span></span>
                     </div>
+                    <?php
+                     $ses = \App\SmSession::where('is_default',1)->first();  
+                    ?>
                     
                     <div class="d-flex mb-1">
                         <span>IN THE ANNUAL EXAMINATION CONDUCTED BY SCHOOL/CAMPUS IN </span>
-                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"> </span>
+                        <span style="flex-grow: 1;border-bottom:2px dotted black;padding-right:20px;"><span style="margin-left: 20px;"> <?php echo e($ses->session); ?> </span></span>
                         <span>
                             Bs
                         </span>
