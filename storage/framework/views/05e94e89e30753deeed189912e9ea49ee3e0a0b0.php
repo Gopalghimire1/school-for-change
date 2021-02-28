@@ -245,7 +245,7 @@
             <div style="margin-top:5rem; visibility: hidden;">hello</div>
 
             <div class="row mt-5">
-                <div class="col-6 text-center">
+                <div class="col-4 text-center">
                     <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
 
                     </span>
@@ -256,7 +256,20 @@
                     
 
                 </div>
-                <div class="col-6 text-center">
+
+                <div class="col-4 text-center">
+                    <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
+
+                    </span>
+                    <br>
+                    <span>
+                        CHECKED BY
+                    </span>
+                    
+
+                </div>
+
+                <div class="col-4 text-center">
                     <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
 
                     </span>
