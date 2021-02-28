@@ -135,7 +135,7 @@
                     <h3 style="font-size:28px;">
                         <strong>{{$name}}</strong>
                         <br>
-                        <strong>{{$address}}</strong> 
+                        <strong style="font-size: 20px;">{{$address}}</strong> 
                     </h3>
                    
                     <h5 style="padding-top:20px;"> <strong>GRADE-SHEET</strong></h5>

@@ -136,7 +136,7 @@
                     <h3 style="font-size:28px;">
                         <strong><?php echo e($name); ?></strong>
                         <br>
-                        <strong><?php echo e($address); ?></strong> 
+                        <strong style="font-size: 20px;"><?php echo e($address); ?></strong> 
                     </h3>
                    
                     <h5 style="padding-top:20px;"> <strong>GRADE-SHEET</strong></h5>
