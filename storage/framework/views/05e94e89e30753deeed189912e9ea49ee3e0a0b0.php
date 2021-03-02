@@ -198,7 +198,7 @@
                         
                         <tr style="border:none !important;">
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->subject->subject_code); ?></td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->subject->subject_name); ?></td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;"><?php echo e($item->subject->subject_name); ?></td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->subject->credit_hour); ?></td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->total_gpa_point); ?></td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"><?php echo e($item->total_gpa_grade); ?></td>
