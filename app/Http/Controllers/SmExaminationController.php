@@ -323,7 +323,7 @@ class SmExaminationController extends Controller
     public function marksRegisterSearch(Request $request)
     {
 
-
+        $intpercentage=0;
         $request->validate([
             'exam' => 'required',
             'class' => 'required',
@@ -553,7 +553,7 @@ class SmExaminationController extends Controller
             Toastr::success('Operation successful', 'Success');
             return redirect('marks-register');
         } catch (\Exception $e) {
-            dd($e);
+            dd($e,$intpercentage);
             DB::rollback();
             Toastr::error('Operation Failed', 'Failed');
 
