@@ -517,7 +517,7 @@ class SmExaminationController extends Controller
                         }
                         $partialresult->title=$examsetup->exam_title;
                         $partialresult->marks=$marktype->total_marks;
-                        $partialpercentage= $partialresult->marks/$examsetup->exam_mark*100;
+                        $partialpercentage= (int)$partialresult->marks/$examsetup->exam_mark*100;
                         $partialmark_grade = SmMarksGrade::where([['percent_from', '<=', $partialpercentage], ['percent_upto', '>=', $partialpercentage]])->first();
                         $partialresult->percentage=$partialpercentage;
                         $partialresult->gpapoint=$partialmark_grade->gpa;
