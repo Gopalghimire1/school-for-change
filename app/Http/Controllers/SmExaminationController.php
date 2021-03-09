@@ -453,7 +453,7 @@ class SmExaminationController extends Controller
 
                     ///prepareresult 
                     $percentage=$total_marks_persubject/$total_full_marks*100;
-                    $mark_grade = SmMarksGrade::where([['percent_from', '<=', $percentage], ['percent_upto', '>=', $percentage]])->first();
+                    $mark_grade = SmMarksGrade::where([['percent_from', '<', $percentage], ['percent_upto', '>=', $percentage]])->first();
 
 
                     $previous_result_record = SmResultStore::where([
