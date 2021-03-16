@@ -45,12 +45,12 @@
 </style>
 
 <div class="col-12" style="display: flex; justify-content: space-between;">
-    <div>
+    {{-- <div>
         <input type="checkbox" name="abc" id="signgle" onchange="
         document.getElementById('select_student_div').style.display=this.checked?'flex':'none';
     ">
         <label for="relationFather">For Single Student</label>
-    </div>
+    </div> --}}
     <div>
         <span class="primary-btn small fix-gr-bg" onclick="printDiv('printdiv');">Print</span>
     </div>
@@ -107,6 +107,14 @@
                     <strong>{{ $errors->first('student') }}</strong>
                 </span>
                 @endif
+            </div>
+
+            <div class="col-lg-3 mt-30-md">
+                <select class="w-100 bb niceSelect form-control" name="search_type">
+                    <option value="">Select Search Type *</option>
+                    <option value="0">Result List</option>
+                    <option value="1">Result Marksheet</option>
+                </select>
             </div>
 
             

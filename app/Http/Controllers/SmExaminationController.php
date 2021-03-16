@@ -1476,6 +1476,8 @@ class SmExaminationController extends Controller
 
 
     public function markSheetReportMultipleStudentSearch(Request $request){
+        // dd($request->all());
+        
             if($request->student == null){
             
                 $students=SmResultStore::where('exam_type_id',$request->exam)->where('class_id',$request->class)->where('section_id',$request->section)->select('student_id')->distinct()->get()->toArray();
@@ -1544,18 +1546,23 @@ class SmExaminationController extends Controller
 
                 $name=env('SCHOOL_NAME',"NAragram");
                 $address=env('SCHOOL_ADDRESS',"bIRATNAGAR");
-                return view('backEnd.reports.multiple_student_report',compact('name','address','datas','exams','classes'));
+                if($request->search_type==0){
+                    $section = SmSection::where('id',$request->section)->first();
+                    return view('backEnd.reports.resultlist',compact('name','address','datas','exams','classes','section'));
+                }else{
+                    return view('backEnd.reports.multiple_student_report',compact('name','address','datas','exams','classes'));
+                }
     
             }else{
                 return $this->markSheetReportStudentSearch($request);
             }
-
     }
+
+
+
 
     public function markSheetReportStudentPrint(Request $request)
     {
-
-
 
         $exams = SmExamType::where('active_status', 1)->get();
         $classes        =   SmClass::where('active_status', 1)->get();
