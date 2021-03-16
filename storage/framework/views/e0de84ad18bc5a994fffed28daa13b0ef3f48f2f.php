@@ -119,7 +119,7 @@
                     <tr>
                         <td><?php echo e($std->full_name); ?></td>
                         <td><?php echo e($std->roll_no); ?></td>
-                        <td><?php echo e($data['gpa']); ?></td>
+                        <td><?php echo e(round($data['gpa'], 2)); ?></td>
                         <td><?php echo e($std->class->class_name); ?></td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

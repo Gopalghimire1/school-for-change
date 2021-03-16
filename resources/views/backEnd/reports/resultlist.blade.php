@@ -123,7 +123,7 @@
                     <tr>
                         <td>{{ $std->full_name}}</td>
                         <td>{{$std->roll_no}}</td>
-                        <td>{{ $data['gpa']}}</td>
+                        <td>{{ round($data['gpa'], 2)}}</td>
                         <td>{{$std->class->class_name}}</td>
                     </tr>
                     @endforeach
