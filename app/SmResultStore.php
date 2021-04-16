@@ -4,11 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\SmMarkStore;
+use App\SmSubject;
 class SmResultStore extends Model
 {
     public function subject(){
         return $this->belongsTo(SmSubject::class,'subject_id','id');
+        // $sub =  SmSubject::where('id',$this->subject_id)->orderBy('credit_hour','desc')->first();
+        // return $sub;
     }
+
+    
     public function studentInfo(){
     	return $this->belongsTo('App\SmStudent', 'student_id', 'id');
     }

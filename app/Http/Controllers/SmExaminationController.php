@@ -1407,7 +1407,7 @@ class SmExaminationController extends Controller
     {
         // dd($request->all());
 
-        $students=SmResultStore::where('exam_type_id',$request->exam)->where('class_id',$request->class)->where('section_id',$request->section)->where('student_id',$request->student)->first();
+                $students=SmResultStore::where('exam_type_id',$request->exam)->where('class_id',$request->class)->where('section_id',$request->section)->where('student_id',$request->student)->first();
                 $datas=[];
                 // dd($student);
                 $data=[];
@@ -1417,6 +1417,7 @@ class SmExaminationController extends Controller
                 $group=[];
                 foreach($marks as $mark){
                     $sub=$mark->subject;
+                    // dd($sub);
                     if($sub->identifier!=null){
                         if(!isset($group['mark_'.$sub->identifier])){
                             $group['mark_'.$sub->identifier]=[];
@@ -1487,7 +1488,8 @@ class SmExaminationController extends Controller
                     $data=[];
                     $data['std']=SmStudent::find($student['student_id']);
     
-                    $marks=SmResultStore::where('exam_type_id',$request->exam)->where('student_id',$student['student_id'])->get();
+                    $marks=SmResultStore::join('sm_subjects','sm_result_stores.subject_id','=','sm_subjects.id')->where('sm_result_stores.exam_type_id',$request->exam)->where('sm_result_stores.student_id',$student['student_id'])->orderBy('sm_subjects.subject_code','ASC')->select('sm_result_stores.*')->get();
+                    // dd($marks);
                     $group=[];
                     foreach($marks as $mark){
                         $sub=$mark->subject;
