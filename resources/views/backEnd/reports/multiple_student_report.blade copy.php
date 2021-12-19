@@ -185,21 +185,13 @@
             <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" >
                 <thead>
                     <tr style="border:none;">
-                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Code</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black; width: 300px;"  rowspan="2">Subject</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;"  rowspan="2">Credit Hour</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;" colspan="2">Obtained Grade</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Final Grade</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Grade Point</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Remarks</th>
-                    </tr>
-                    <tr>
-                        <th style="border-left:1px solid black;border-right:1px solid black;">
-                            TH
-                        </th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;">
-                            PR
-                        </th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Code</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black; width: 300px;">Subject</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Credit Hour</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Grade Point</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Final Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">Remarks</th>
                     </tr>
                 </thead>
                 
@@ -209,20 +201,7 @@
                             $tt=0;
                         @endphp
                         @foreach ($data['marks'] as $dataitem)
-                        <tr style="border:none !important;">
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->subject->subject_code }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem[0]->subject->subject_name }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->subject->credit_hour +(isset($dataitem[1])?$dataitem[1]->subject->credit_hour:0))}}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->total_gpa_grade }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ isset($dataitem[1])?$dataitem[1]->total_gpa_grade:'' }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->finalgradel }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->total_gpa_point + (isset($dataitem[1])?$dataitem[1]->total_gpa_point:0))}}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            @php
-                                $tt+=1;
-                            @endphp
-                        </tr>
-                        {{-- @foreach ($dataitem as $item)
+                        @foreach ($dataitem as $item)
                         
                         <tr style="border:none !important;">
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $item->subject->subject_code }}</td>
@@ -236,7 +215,7 @@
                         @php
                             $tt+=1;
                         @endphp
-                        @endforeach --}}
+                        @endforeach
                         @endforeach
                         @for ($i = $tt; $i < 15; $i++)
                             <tr style="border:none !important;">
@@ -263,7 +242,6 @@
                             <th colspan="3">
                                 GRADE POINT AVERAGE(GPA): {{round($data['gpa'],2)}}
                             </th>
-                            <th></th>
                             
                         </tr>
                     </tfoot>

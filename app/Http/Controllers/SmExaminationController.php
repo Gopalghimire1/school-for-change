@@ -1535,6 +1535,7 @@ class SmExaminationController extends Controller
                     $data['gpa']=$totalmaingp/$totalmainch;
                     array_push($datas,$data);
                 }
+                // dd($datas);
                 // for forms
                 $exams = SmExamType::where('active_status', 1)->get();
                 $classes = SmClass::where('active_status', 1)->get();

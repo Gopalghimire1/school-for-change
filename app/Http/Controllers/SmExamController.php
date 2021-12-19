@@ -33,12 +33,12 @@ class SmExamController extends Controller
     public function index()
     {
         $exams = SmExam::all();
+        $exam = SmExam::where('id',2)->first();
         $exams_types = SmExamType::all();
         $classes = SmClass::where('active_status', 1)->get();
         $subjects = SmSubject::where('active_status', 1)->get();
         $sections = SmSection::where('active_status', 1)->get();
-        
-        return view('backEnd.examination.exam', compact('exams', 'classes', 'subjects', 'exams_types', 'sections'));
+        return view('backEnd.examination.exam', compact('exam','exams', 'classes', 'subjects', 'exams_types', 'sections'));
     }
 
 
@@ -200,14 +200,12 @@ class SmExamController extends Controller
      */
     public function show($id)
     {
-
+        $exams = SmExam::all();
         $exams_types = SmExamType::all();
         $exam = SmExam::find($id);
         $classes = SmClass::where('active_status', 1)->get();
         $subjects = SmAssignSubject::where('active_status', 1)->where('class_id', $exam->class_id)->where('section_id', $exam->section_id)->get();
         $sections = SmClassSection::where('class_id', $exam->class_id)->get();
-
-
 
         return view('backEnd.examination.examEdit', compact('exam', 'exams', 'classes', 'subjects', 'sections', 'exams_types'));
     }
