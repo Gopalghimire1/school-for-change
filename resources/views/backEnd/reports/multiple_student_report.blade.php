@@ -216,7 +216,7 @@
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->total_gpa_grade }}</td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ isset($dataitem[1])?$dataitem[1]->total_gpa_grade:'' }}</td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->finalgradel }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->total_gpa_point + (isset($dataitem[1])?$dataitem[1]->total_gpa_point:0))}}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->finalgrade)}}</td>
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                             @php
                                 $tt+=1;
