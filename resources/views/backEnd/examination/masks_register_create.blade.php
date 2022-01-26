@@ -126,7 +126,7 @@
 
     {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'marks_register_store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'marks_register_store']) }} 
 
-
+        <input type="hidden" name="isop" value="{{$sexam->isop}}">
         <input type="hidden" name="exam_id" value="{{$exam_id}}">
         <input type="hidden" name="class_id" value="{{$class_id}}">
         <input type="hidden" name="section_id" value="{{$section_id}}">

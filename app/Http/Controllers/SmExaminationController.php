@@ -335,6 +335,7 @@ class SmExaminationController extends Controller
             'subject' => 'required'
         ]);
 
+     
 
         $exams = SmExam::where('active_status', 1)->get();
         $classes = SmClass::where('active_status', 1)->get();
@@ -346,6 +347,15 @@ class SmExaminationController extends Controller
         $subject_id = $request->subject;
         $subjectNames = SmSubject::where('id', $subject_id)->first();
 
+        $sexam=SmExam::where(
+            [
+                ['exam_type_id', $exam_id],
+                ['class_id', $class_id],
+                ['section_id', $section_id],
+                ['subject_id', $subject_id]
+            ]
+        )->first();
+        // dd($sexam,$exam_id);
 
         $students = SmStudent::where('active_status', 1)->where('class_id', $request->class)->where('section_id', $request->section)->get();
 
@@ -369,7 +379,7 @@ class SmExaminationController extends Controller
 
                 $number_of_exam_parts = count($marks_entry_form);
 
-                return view('backEnd.examination.masks_register_create', compact('exams', 'classes', 'students', 'exam_id', 'class_id', 'section_id', 'subject_id', 'subjectNames', 'number_of_exam_parts', 'marks_entry_form', 'exam_types'));
+                return view('backEnd.examination.masks_register_create', compact('sexam','exams', 'classes', 'students', 'exam_id', 'class_id', 'section_id', 'subject_id', 'subjectNames', 'number_of_exam_parts', 'marks_entry_form', 'exam_types'));
             } else {
                 return redirect()->back()->with('message-danger', 'No result found or exam setup is not done!');
             }
@@ -383,6 +393,7 @@ class SmExaminationController extends Controller
     public function marksRegisterStore(Request $request)
     {
 
+        // dd($request->all());
         // dd($request->abs,$request->student_ids);
         //dd($request->marks[151]);
         DB::beginTransaction();
