@@ -586,6 +586,8 @@ Route::group(['middleware' => ['CheckDashboardMiddleware']], function () {
     Route::get('exam-marks-setup/{id}', 'SmExamController@exam_setup')->where('id', '[0-9]+');
     Route::get('get-class-subjects', 'SmExamController@getClassSubjects');
     Route::get('subject-assign-check', 'SmExamController@subjectAssignCheck');
+    Route::get('exam-marks-data/{id}', 'SmExamController@data');
+    Route::get('exam-marks-sheet-min/{exam}/{class}/{section}/{type}', 'SmExamController@sheet');
 
 
     // Dormitory Module

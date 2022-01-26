@@ -190,7 +190,11 @@ class SmExaminationController extends Controller
     public function exam_type()
     {
         $classes = SmClass::where('active_status', 1)->get();
-        $exams_types = SmExamType::where('session_id',\App\SmSession::where('is_default',1)->select('id')->first()->id)->get();
+        // $exams_types = SmExamType::where('session_id',\App\SmSession::where('is_default',1)->select('id')->first()->id)->get();
+        $exams_types=SmExamType::join('sm_sessions','sm_sessions.id','=','sm_exam_types.session_id')
+        ->select('sm_exam_types.*','sm_sessions.session')
+        ->get();
+        // dd($exams_types);
         return view('backEnd.examination.exam_type',compact('classes', 'exams_types'));
     }
 
@@ -477,6 +481,7 @@ class SmExaminationController extends Controller
                         $result_record->student_id             =   $sid;
                         $result_record->is_absent              =   $is_absent;
                         $result_record->percentage             =   $percentage;
+                        $result_record->isop                    =  $request->isop;
                         
                         // $result_record->student_roll_no        =   $roll_no;
                         // $result_record->student_addmission_no  =   $admission_no;
@@ -490,6 +495,7 @@ class SmExaminationController extends Controller
                         $id = $previous_result_record->id;
                         $result_record = SmResultStore::find($id);
                         $result_record->percentage             =   $percentage;
+                        $result_record->isop             =   $request->isop;
                         $result_record->total_marks            =   $total_marks_persubject;
                         $result_record->total_gpa_point        =   $mark_grade->gpa;
                         $result_record->total_gpa_grade        =   $mark_grade->grade_name;
@@ -551,7 +557,13 @@ class SmExaminationController extends Controller
 
             DB::commit();
             Toastr::success('Operation successful', 'Success');
-            return redirect('marks-register');
+            if($request->filled('hasdata')){
+                return redirect()->back();
+
+            }else{
+
+                return redirect('marks-register');
+            }
         } catch (\Exception $e) {
             dd($e,$intpercentage);
             DB::rollback();

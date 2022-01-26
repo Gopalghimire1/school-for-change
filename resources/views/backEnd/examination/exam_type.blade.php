@@ -168,6 +168,7 @@
                                 @endif
                                 <tr>
                                     <th>@lang('lang.sl')</th>
+                                    <th>Session</th>
                                     <th>@lang('lang.exam_name')</th>
                                     <th>@lang('lang.Status')</th>
                                     <th>@lang('lang.action')</th>
@@ -179,6 +180,7 @@
                                 @foreach($exams_types as $exams_type)
                                 <tr>
                                     <td>{{++$i}}</td>
+                                    <td>{{$exams_type->session}}</td>
                                     <td>{{$exams_type->title}}</td>
                                     <td>{{($exams_type->active_status == 1) ? 'Active' : 'Inactive'}}</td> 
                                     <td>

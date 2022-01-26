@@ -138,6 +138,12 @@
                                             @endif
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 d-flex align-items-center">
+                                        <div>
+                                            <input {{$exam->isop==1?'checked':''}}  type="checkbox" name="isop" id="isop" value="1"> 
+                                            <label for="isop">Is Optional</label>
+                                        </div>
+                                    </div>
                                 </div>
 
   
@@ -159,7 +165,8 @@
                                 <thead>
                                     <tr>
                                       <th>@lang('lang.exam_title')</th>
-                                      <th>@lang('lang.exam_mark')</th>
+                                      <th>Fullmarks</th>
+                                      <th>Passmarks</th>
                                       <th>@lang('lang.action')</th>
                                     </tr>
                                 </thead>
@@ -180,6 +187,12 @@
                                         <div class="input-effect">
                                             <input class="primary-input form-control{{ $errors->has('exam_mark') ? ' is-invalid' : '' }} exam_mark"
                                             type="number" id="exam_mark" name="exam_mark[]" autocomplete="off"   value="{{$row->exam_mark}}">
+                                        </div>
+                                    </td> 
+                                    <td class="border-top-0">
+                                        <div class="input-effect">
+                                            <input class="primary-input form-control{{ $errors->has('pass_mark') ? ' is-invalid' : '' }} pass_mark"
+                                            type="number" id="pass_mark" name="pass_mark[]" autocomplete="off"   value="{{$row->passmark}}">
                                         </div>
                                     </td> 
                                     <td  class="border-top">
