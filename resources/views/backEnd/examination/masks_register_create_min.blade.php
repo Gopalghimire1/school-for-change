@@ -33,7 +33,7 @@
 
         
         <input type="hidden" name="hasdata" value="{{$exam->exam_type_id}}">
-        <input type="hidden" name="isop" value="{{$exam->istop}}">
+        <input type="hidden" name="isop" value="{{$exam->isop}}">
         <input type="hidden" name="exam_id" value="{{$exam->exam_type_id}}">
         <input type="hidden" name="class_id" value="{{$exam->class_id}}">
         <input type="hidden" name="section_id" value="{{$exam->section_id}}">
