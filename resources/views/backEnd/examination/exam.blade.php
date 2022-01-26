@@ -41,7 +41,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6" id="exam_subejct">
+                    <div class="col-md-12" id="exam_subejct">
 
                     </div>
 

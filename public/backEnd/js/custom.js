@@ -3653,19 +3653,27 @@ $(document).ready(function () {
 
                     var appendRow = "";
 
-
-                    appendRow += "<div class='col-lg-12'>";
-                    appendRow += "<label>Select Subject *</label>";
+                    let j=0;
+                    data.sort(function (a, b) {
+                        return a.subject_code.localeCompare(b.subject_code);
+                    });
+                    // appendRow += "<div class='col-lg-4'>";
+                    appendRow += "<label>Select Subject *</label><div class='row'>";
                     $.each(data, function (i, value) {
-                        appendRow += "<div class='input-effect'>";
+                        appendRow += "<div class='input-effect col-lg-6'>";
                             appendRow += "<input type='checkbox' id='subjects_"+value.id+"' class='common-checkbox subject-checkbox' name='subjects_ids[]' value='"+value.id+"' >";
-                            appendRow += "<label for='subjects_"+value.id+"'>"+value.subject_name+"</label>";
+                            appendRow += "<label for='subjects_"+value.id+"'>"+value.subject_name+"("+value.subject_code+")"+"</label>";
                         appendRow += "</div>";
-
+                        j+=1;
+                        if(j==2){
+                            appendRow += "<div class='col-12'><hr class='mt-0 mb-1'></div>";
+                            j=0;
+                        }
 
                     });
 
-                    appendRow += "<div class='col-lg-12'>";
+                    // appendRow += "<div class='col-lg-12'>";
+                    appendRow += "</div>";
 
 
                     console.log(appendRow);

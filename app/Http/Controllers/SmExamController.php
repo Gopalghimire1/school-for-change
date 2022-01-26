@@ -157,7 +157,15 @@ class SmExamController extends Controller
                     foreach ($request->subjects_ids as $subject_id) {
 
                         if (in_array($subject_id, $eligible_subjects)) {
-                            $exam = new SmExam();
+                            $exam=SmExam::where([
+                                ['subject_id',$subject_id],
+                                ['class_id',$request->class_ids],
+                                ['section_id',$section->section_id],
+                                ['exam_type_id',$exam_type_id],
+                            ])->first();
+                            if($exam==null){
+                                $exam = new SmExam();
+                            }
                             $exam->isop = $request->filled('isop')?1:0;
                             $exam->exam_type_id = $exam_type_id;
                             $exam->class_id = $request->class_ids;
@@ -180,7 +188,18 @@ class SmExamController extends Controller
                                 $ex_title = $request->exam_title[$i];
                                 $ex_mark = $request->exam_mark[$i];
                                 $ex_passmarks=$request->exam_pass_mark[$i];
-                                $newSetupExam = new SmExamSetup();
+                                $newSetupExam=SmExamSetup::where([
+                                    ['subject_id',$subject_id],
+                                    ['class_id',$request->class_ids],
+                                    ['section_id',$section->section_id],
+                                    ['exam_term_id',$exam_type_id],
+                                    ['exam_id',$exam->id],
+                                ])->first();
+
+                                if($newSetupExam==null){
+                                    $newSetupExam = new SmExamSetup();
+                                }
+
                                 $newSetupExam->exam_id = $exam->id;
                                 $newSetupExam->class_id = $request->class_ids;
                                 $newSetupExam->section_id = $section->section_id;
@@ -465,7 +484,16 @@ class SmExamController extends Controller
         // dd($request->all());
         
           
-            
+                $gpamap=[
+                    'NG'=>'-',
+                    'A+'=>'4.0',
+                    'A'=>'3.6',
+                    'B+'=>'3.2',
+                    'B'=>'2.8',
+                    'C+'=>'2.4',
+                    'C'=>'2.0',
+                    'D'=>'1.6',
+                ];
                 $students=SmResultStore::where('exam_type_id',$exam)->where('class_id',$class)->where('section_id',$section)->select('student_id')->distinct()->get()->toArray();
                 $datas=[];
                 foreach($students as $student){
@@ -514,6 +542,8 @@ class SmExamController extends Controller
                         $group_item[0]->finalgrade=$totalsmgp/$c;
                         $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
                         $group_item[0]->finalgradel=$gpa->grade_name;
+                        $group_item[0]->finalgrade=$gpamap[ $gpa->grade_name];
+
                         $group_item[0]->gp=$totalgp;
                         $group_item[0]->cp=$totalch;
                         array_push($group1,$group_item);

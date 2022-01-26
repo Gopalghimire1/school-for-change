@@ -239,7 +239,7 @@
                         @endforeach --}}
                         @endforeach
                         
-                        @for ($i = $tt; $i < (count($data['marks_op'])>0?10:15); $i++)
+                        @for ($i = $tt; $i < 10; $i++)
                             <tr style="border:none !important;">
                                 <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
                                 <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
@@ -269,12 +269,12 @@
                         </tr>
                     </tfoot>
             </table>
-            @if (count($data['marks_op'])>0)
-                
-            <h2>
+            <h2 class="mb-1">
                 Extra Credit Subject
             </h2>
-            <table>
+            @if (count($data['marks_op'])>0)
+                
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
                 @foreach ($data['marks_op'] as $dataitem)
                         <tr style="border:none !important;">
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->subject->subject_code }}</td>
@@ -288,11 +288,23 @@
                         </tr>
                 @endforeach
             </table>
+            @else
+            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
+                <tr style="border:none !important;">
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                </tr>
+            </table>
             @endif
 
            
            
-            <div style="margin-top:5rem; visibility: hidden;">hello</div>
+            <div style="margin-top:4rem; visibility: hidden;">hello</div>
 
             <div class="row mt-5">
                 <div class="col-4 text-center">
