@@ -492,7 +492,9 @@ class SmExamController extends Controller
                     'B'=>'2.8',
                     'C+'=>'2.4',
                     'C'=>'2.0',
-                    'D'=>'1.6',
+                    'D+'=>'1.6',
+                    'D'=>'1.2',
+                    'E'=>'0.8',
                 ];
                 $students=SmResultStore::where('exam_type_id',$exam)->where('class_id',$class)->where('section_id',$section)->select('student_id')->distinct()->get()->toArray();
                 $datas=[];
