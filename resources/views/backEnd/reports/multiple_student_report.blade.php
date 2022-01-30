@@ -267,40 +267,41 @@
                             <th></th>
                             
                         </tr>
+                        <tr style="border:none !important;">
+                            <td colspan="7" style="border:none !important;">
+                                <h2 class="my-1">
+                                    Extra Credit Subject
+                                </h2>
+                            </td>
+                        </tr>
+                        @if (count($data['marks_op'])>0)     
+                        @foreach ($data['marks_op'] as $dataitem)
+                                <tr style="border:none !important;">
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->subject->subject_code }}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem[0]->subject->subject_name }}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->subject->credit_hour +(isset($dataitem[1])?$dataitem[1]->subject->credit_hour:0))}}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->total_gpa_grade }}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ isset($dataitem[1])?$dataitem[1]->total_gpa_grade:'' }}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->finalgradel }}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->finalgrade)}}</td>
+                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                                </tr>
+                        @endforeach
+                        @else
+                        <tr style="border:none !important;">
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                        </tr>
+                      
+                        @endif
                     </tfoot>
             </table>
-            <h2 class="mb-1">
-                Extra Credit Subject
-            </h2>
-            @if (count($data['marks_op'])>0)
-                
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
-                @foreach ($data['marks_op'] as $dataitem)
-                        <tr style="border:none !important;">
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->subject->subject_code }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem[0]->subject->subject_name }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->subject->credit_hour +(isset($dataitem[1])?$dataitem[1]->subject->credit_hour:0))}}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->total_gpa_grade }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ isset($dataitem[1])?$dataitem[1]->total_gpa_grade:'' }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem[0]->finalgradel }}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ ($dataitem[0]->finalgrade)}}</td>
-                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                        </tr>
-                @endforeach
-            </table>
-            @else
-            <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5">
-                <tr style="border:none !important;">
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                    <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                </tr>
-            </table>
-            @endif
+            
 
            
            
