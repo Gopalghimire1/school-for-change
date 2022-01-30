@@ -132,7 +132,7 @@
     @foreach ($datas as $data)
         @php
             $std=$data['std'];
-            if($std->regno==null || $std->regno=''){
+            if($std->regno==null || $std->regno==''){
                 continue;
             }
             // dd($std);
