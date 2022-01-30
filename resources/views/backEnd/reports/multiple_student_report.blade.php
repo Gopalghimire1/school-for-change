@@ -132,6 +132,9 @@
     @foreach ($datas as $data)
         @php
             $std=$data['std'];
+            if($std->regno==null || $std->regno=''){
+                continue;
+            }
             // dd($std);
         @endphp
         <div class="card-body" style="border:2px rgb(0, 0, 0) solid; padding:1rem;height:{{env('printheight','1350px')}};">
