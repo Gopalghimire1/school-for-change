@@ -210,6 +210,8 @@
 
                         @php
                             $tt=0;
+                            $totgrade=0;
+                            $totalcredit=0;
                         @endphp
                         @foreach ($data['marks'] as $dataitem)
                         <tr style="border:none !important;">
@@ -223,6 +225,10 @@
                             <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                             @php
                                 $tt+=1;
+                                $credit=($dataitem[0]->subject->credit_hour +(isset($dataitem[1])?$dataitem[1]->subject->credit_hour:0));
+                                $gpa=$credit * ($dataitem[0]->finalgrade);
+                                $totgrade+=$gpa;
+                                $totalcredit+=$credit;
                             @endphp
                         </tr>
                         {{-- @foreach ($dataitem as $item)
@@ -266,7 +272,10 @@
                             <th></th>
                             <th></th>
                             <th colspan="3">
-                                GRADE POINT AVERAGE(GPA): {{round($data['gpa'],2)}}
+                                @if ($totalcredit!=0)
+                                    
+                                    GRADE POINT AVERAGE(GPA): {{round(($totgrade/$totalcredit),2)}}
+                                @endif
                             </th>
                             <th></th>
                             
