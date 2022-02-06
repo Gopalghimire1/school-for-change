@@ -16,6 +16,14 @@ class SmMarkStore extends Model
             ['exam_setup_id',$exam_setup_id], 
     		['subject_id',$subject_id]
     	])->first();
+		// dd([
+    	// 	['student_id',$student_id], 
+    	// 	['exam_term_id',$exam_id], 
+    	// 	['class_id',$class_id], 
+    	// 	['section_id',$section_id], 
+        //     ['exam_setup_id',$exam_setup_id], 
+    	// 	['subject_id',$subject_id]
+    	// ]);
     	if(!empty($getMark)){
     		$output= $getMark->total_marks;
     	}else{

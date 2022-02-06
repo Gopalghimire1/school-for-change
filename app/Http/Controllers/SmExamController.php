@@ -454,7 +454,7 @@ class SmExamController extends Controller
     public function data($id)
     {
         $exam=SmExam::where('id',$id)->first();
-        
+        // dd($exam);
         $subjectNames = SmSubject::where('id', $exam->subject_id)->first();
 
 
@@ -468,7 +468,7 @@ class SmExamController extends Controller
 
         // }
         $marks_entry_form = SmExamSetup::where('exam_id',$exam->id)->get();
-
+        // dd($marks_entry_form);
         if ($marks_entry_form->count() > 0) {
 
 
@@ -480,7 +480,7 @@ class SmExamController extends Controller
         }
     }
 
-    public function sheet($exam,$class,$section,$type){
+    public function sheet1($exam,$class,$section,$type){
         // dd($request->all());
         
           
@@ -532,6 +532,7 @@ class SmExamController extends Controller
                         $totalch=0;
                         $c=0;
                         foreach($group_item as $item){
+                            // dd($item);
                             $sub=$item->subject;
                             $totalsmgp+=$item->total_gpa_point;
                             $totalgp+=$item->total_gpa_point*$sub->credit_hour;
@@ -541,7 +542,9 @@ class SmExamController extends Controller
                             $c+=1;
                         }
     
-                        $group_item[0]->finalgrade=$totalsmgp/$c;
+                        // $group_item[0]->finalgrade=$totalsmgp/$c;
+                        $group_item[0]->finalgrade=$totalgp/$totalch;
+
                         $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
                         $group_item[0]->finalgradel=$gpa->grade_name;
                         $group_item[0]->finalgrade=$gpamap[ $gpa->grade_name];
@@ -551,7 +554,7 @@ class SmExamController extends Controller
                         array_push($group1,$group_item);
                     }
                     $data['marks']=$group1;
-                    $data['gpa']=$totalmaingp/$totalmainch;
+                    // $data['gpa']=$totalmaingp/$totalmainch;
 
                     //for optional subbject 
                     $group_op=[];
@@ -572,6 +575,7 @@ class SmExamController extends Controller
                     $group2=[];
                     $totalmaingp2=0;
                     $totalmainch2=0;
+                    // dd($group_op);
                     foreach ($group_op as $group_item) {
                         $totalgp=0;
                         $totalsmgp=0;
@@ -586,16 +590,19 @@ class SmExamController extends Controller
                             $totalmainch2+=$sub->credit_hour;
                             $c+=1;
                         }
-    
-                        $group_item[0]->finalgrade=$totalsmgp/$c;
+                        // $group_item[0]->finalgrade=$totalsmgp/$c;
+                        
+                        $group_item[0]->finalgrade=$totalgp/$totalch;
                         $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
                         $group_item[0]->finalgradel=$gpa->grade_name;
+                        $group_item[0]->finalgrade=$gpamap[ $gpa->grade_name];
+
                         $group_item[0]->gp=$totalgp;
                         $group_item[0]->cp=$totalch;
                         array_push($group2,$group_item);
                     }
                     $data['marks_op']=$group2;
-                    $data['gpa_op']= $totalmainch2==0?0:$totalmaingp2/$totalmainch2;
+                    // $data['gpa_op']= $totalmainch2==0?0:$totalmaingp2/$totalmainch2;
                     array_push($datas,$data);
                 }
                 // dd($datas);
@@ -617,6 +624,127 @@ class SmExamController extends Controller
                     return view('backEnd.reports.resultlist',compact('name','address','datas','exams','classes','section'));
                 }else{
                     return view('backEnd.reports.multiple_student_report',compact('name','address','datas','exams','classes'));
+                }
+    
+            
+    }
+    public function sheet($exam,$class,$section,$type){
+        // dd($request->all());
+        
+          
+                $gpamap=[
+                    'NG'=>'-',
+                    'A+'=>'4.0',
+                    'A'=>'3.6',
+                    'B+'=>'3.2',
+                    'B'=>'2.8',
+                    'C+'=>'2.4',
+                    'C'=>'2.0',
+                    'D+'=>'1.6',
+                    'D'=>'1.2',
+                    'E'=>'0.8',
+                ];
+                $students=SmResultStore::where('exam_type_id',$exam)->where('class_id',$class)->where('section_id',$section)->select('student_id')->distinct()->get()->toArray();
+                $datas=[];
+                foreach($students as $student){
+                    // dd($student);
+                    $data=[];
+                    $data['std']=SmStudent::find($student['student_id']);
+                    
+                    $marks=SmResultStore::join('sm_subjects','sm_result_stores.subject_id','=','sm_subjects.id')->where('sm_result_stores.exam_type_id',$exam)->where('sm_result_stores.student_id',$student['student_id'])->orderBy('sm_subjects.subject_code','ASC')->select('sm_result_stores.*')->get();
+                    // dd($marks);
+                    //for compulsary subject
+                    $group=[];
+                    foreach($marks as $mark){
+                        $sub=$mark->subject;
+                        if($sub->identifier!=null){
+                            if(!isset($group['mark_'.$sub->identifier])){
+                                $group['mark_'.$sub->identifier]=[];
+                            }
+                            array_push($group['mark_'.$sub->identifier],$mark);
+                        }else{
+                            if(!isset($group['mark_'.$sub->subject_code])){
+                                $group['mark_'.$sub->subject_code]=[];
+                            }
+                            array_push($group['mark_'.$sub->subject_code],$mark);
+                        }
+                    }
+                    
+    
+                    $group1=[];
+                  
+                    foreach ($group as $group_item) {
+                        $totalgp=0;
+                        $totalsmgp=0;
+                        $totalch=0;
+                        $totalmarks=0;
+                        $grades=[];
+                        $c=0;
+                        $isop=false;
+                        $isabs=false;
+                        foreach($group_item as $item){
+                            // dd($item);
+                            $sub=$item->subject;
+                            // dd($sub);
+                            // $totalsmgp+=$item->total_gpa_point;
+                            // $totalgp+=$item->total_gpa_point*$sub->credit_hour;
+                            $totalch+=$sub->credit_hour;
+                            $totalmarks+=$item->total_marks;
+                            array_push($grades,$item->is_absent==1?'ABS':$item->total_gpa_grade);
+                            if(!$isop){
+                                $isop=$item->isop!=0;
+                            }
+                            if(!$isabs){
+                                $isabs=$item->is_absent!=0;
+                            }
+                            $c+=1;
+                        }
+    
+                        // $group_item[0]->finalgrade=$totalsmgp/$c;
+                        // $group_item[0]->finalgrade=$totalgp/$totalch;
+                        // $group_item[0]->totalmarks=$totalmarks;
+
+                        // $gpa=SmMarksGrade::where('gpa','<=',$group_item[0]->finalgrade)->orderBy('gpa','DESC')->first();
+                        // $group_item[0]->finalgradel=$gpa->grade_name;
+                        // $group_item[0]->finalgrade=$gpamap[ $gpa->grade_name];
+
+                        // $group_item[0]->gp=$totalgp;
+                        // $group_item[0]->cp=$totalch;
+                        $per=($totalmarks/100) * 100;
+                        $_data=(object)[
+                            "code"=>$group_item[0]->subject->subject_code,
+                            "name"=>$group_item[0]->subject->subject_name,
+                            'credithour'=>$totalch,
+                            "grades"=>$grades,
+                            'totalmarks'=>$totalmarks,
+                            "per"=>$per ,
+                            "isop"=>$isop ,
+                            "isabs"=>$isabs ,
+                            'finalgrade'=>SmMarksGrade::where('percent_upto','>=',(int)$per)->where('percent_from','<=',(int)$per)->first()
+                        ];
+                        // dd($_data);
+                        // array_push($group1,$group_item);
+                        array_push($group1,$_data);
+                    }
+                    $data['marks']=$group1;
+                    // dd($data);
+                    array_push($datas,$data);
+
+                }
+                // dd($datas);
+            
+                $exams = SmExamType::where('active_status', 1)->get();
+                $classes = SmClass::where('active_status', 1)->get();
+
+            
+
+                $name=env('SCHOOL_NAME',"NAragram");
+                $address=env('SCHOOL_ADDRESS',"bIRATNAGAR");
+                if($type==0){
+                    $section = SmSection::where('id',$section)->first();
+                    return view('backEnd.reports.resultlist',compact('name','address','datas','exams','classes','section'));
+                }else{
+                    return view('backEnd.reports.min_multiple_student_report',compact('name','address','datas','exams','classes'));
                 }
     
             

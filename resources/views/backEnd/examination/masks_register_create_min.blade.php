@@ -82,8 +82,8 @@
                                 <div class="input-effect mt-10">
                                 <input type="hidden" name="exam_setup_ids[]" value="{{$part->id}}">
                                 <?php 
-                                    $search_mark = App\SmMarkStore::get_mark_by_part($student->id, $part->exam_term_id, $part->class_id, $part->section_id, $part->subject_id, $part->id); 
-                                    $is_absent=App\SmMarkStore::get_is_absent_by_part($student->id, $part->exam_term_id, $part->class_id, $part->section_id, $part->subject_id, $part->id)
+                                    $search_mark = App\SmMarkStore::get_mark_by_part($student->id, $exam->exam_type_id, $exam->class_id, $exam->section_id, $exam->subject_id, $part->id); 
+                                    $is_absent=App\SmMarkStore::get_is_absent_by_part($student->id, $exam->exam_type_id, $exam->class_id, $exam->section_id, $exam->subject_id, $part->id)
                                 ?>
                                     <input class="primary-input marks_input" type="text" name="marks[{{$student->id}}][{{$part->id}}]" value="{{!empty($search_mark)?$search_mark:0}}">
                                     <input class="primary-input marks_input" type="hidden" name="exam_Sids[{{$student->id}}][{{$entry_form_count++}}]" value="{{$part->id}}">
