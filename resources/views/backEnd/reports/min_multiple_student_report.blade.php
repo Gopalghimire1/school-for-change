@@ -273,14 +273,14 @@
                             <th></th>
                             
                         </tr>
+                        <tr style="border:1px #E2EAFF solid;">
+                            <td colspan="7" style="border:none !important;">
+                                <h2 class="my-1 text-left">
+                                    Extra Credit Subject
+                                </h2>
+                            </td>
+                        </tr>
                         @if($hasop)
-                            <tr style="border:1px #E2EAFF solid;">
-                                <td colspan="7" style="border:none !important;">
-                                    <h2 class="my-1 text-left">
-                                        Extra Credit Subject
-                                    </h2>
-                                </td>
-                            </tr>
                             @foreach ($data['marks'] as $dataitem)
                                 @if($dataitem->isop)
                                     <tr style="border:none !important;">
@@ -295,6 +295,17 @@
                                     </tr>
                                 @endif
                             @endforeach
+                        @else
+                        <tr style="border:none !important;">
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">}</td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                        </tr>
                         @endif
                     </tfoot>
             </table>
