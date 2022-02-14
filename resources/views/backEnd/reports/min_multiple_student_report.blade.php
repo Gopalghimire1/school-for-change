@@ -297,14 +297,14 @@
                             @endforeach
                         @else
                         <tr style="border:none !important;">
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
-                            <td style="padding:10px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                         </tr>
                         @endif
                     </tfoot>
