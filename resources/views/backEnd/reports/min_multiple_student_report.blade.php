@@ -329,13 +329,7 @@
                 </div>
 
                 <div class="col-4 text-center">
-                    <span style="width:200px;display:inline-block;border-bottom:1px dotted black;">
-
-                    </span>
-                    <br>
-                    <span>
-                        CHECKED BY
-                    </span>
+                   
                     
 
                 </div>
