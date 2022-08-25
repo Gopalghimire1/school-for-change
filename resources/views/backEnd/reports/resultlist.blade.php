@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="white-box mt-4">
+{{-- <div class="white-box mt-4">
     {{ Form::open(['class' => 'form-horizontal', 'files' => true, 'route' => 'mark_sheet_report_multiple_student', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'search_student']) }}
     <div class="row">
         <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
@@ -88,7 +88,7 @@
         </div>
     </div>
     {{ Form::close() }}
-</div>
+</div> --}}
 <div class="mt-4" id="printdiv">
     <div class="row text-center mb-5">
         <div class="col-2">
@@ -113,19 +113,41 @@
                     <tr style="border:none;">
                         <th>Student Name</th>
                         <th>Symbol Number</th>
+                        @foreach ($datas[0]['marks'] as $mark)
+                            <th>{{$mark->name}} {{$mark->isop?"(Optional)":""}}</th>
+                        @endforeach
+                        {{-- <th></th> --}}
                         <th>GPA</th>
                         <th>Class</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($datas as $key => $data)
-                    @php $std=$data['std']; @endphp
-                    <tr>
-                        <td>{{ $std->full_name}}</td>
-                        <td>{{$std->roll_no}}</td>
-                        <td>{{ round($data['gpa'], 2)}}</td>
-                        <td>{{$std->class->class_name}}</td>
-                    </tr>
+                    @php 
+                        $std=$data['std']; 
+                        $tt=0;
+                        $totgrade=0;
+                        $totalcredit=0;
+                        @endphp
+                        @if ($std->roll_no!='' && $std->roll_no!=null)
+                            <tr>
+                                <td>{{ $std->full_name}}</td>
+                                <td>{{$std->roll_no}}</td>
+                                @foreach ($data['marks'] as $mark)
+                                    <td>{{ $mark->isabs?'ABS':$mark->finalgrade->gpa }}</td>
+                                    @php
+                                        if(!$mark->isabs && !$mark->isop){
+                                            $totgrade+=$mark->finalgrade->gpa * $mark->credithour;
+                                            $totalcredit+=$mark->credithour;
+                                        }
+                                    @endphp
+                                @endforeach
+                                <td>{{round(($totgrade/$totalcredit),2)}}</td>
+                                {{-- <td>{{ round($data['marks']->finalgrade->grade_name)}}</td> --}}
+                                <td>{{$std->class->class_name}}</td>
+                            </tr>
+                            
+                        @endif
                     @endforeach
                 </tbody>
             </table>

@@ -741,6 +741,7 @@ class SmExamController extends Controller
                 $name=env('SCHOOL_NAME',"NAragram");
                 $address=env('SCHOOL_ADDRESS',"bIRATNAGAR");
                 if($type==0){
+                    // dd($datas[0]);
                     $section = SmSection::where('id',$section)->first();
                     return view('backEnd.reports.resultlist',compact('name','address','datas','exams','classes','section'));
                 }else{
