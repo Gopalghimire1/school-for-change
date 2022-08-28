@@ -340,7 +340,7 @@
                     </span>
                     <br>
                     <span>
-                        HEAD MASTER/CAMPUS CHIEF
+                        HEAD TEACHER
                     </span>
                 </div>
             </div>
