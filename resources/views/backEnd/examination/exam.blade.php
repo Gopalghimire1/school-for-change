@@ -189,6 +189,11 @@
                                                 result
                                             </strong>
                                         </a>
+                                        <a class="btn btn-link" target="_blank" href="/newstudent/{{$exam_group['class']->id}}/{{$class_group['section']->id}}">
+                                            <strong>
+                                                Data
+                                            </strong>
+                                        </a>
                                     </div>
                                     <hr>
                                     <div class="p-3  " >

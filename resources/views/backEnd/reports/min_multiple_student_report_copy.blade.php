@@ -188,13 +188,21 @@
             <table class="w-100 mt-30 mb-20 table table-bordered marksheet mb-5" >
                 <thead>
                     <tr style="border:none;">
-                        <th style="border-left:1px solid black;border-right:1px solid black;">SUBJECT <BR> CODE</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black; width: 300px;">SUBJECTS</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;" >CREDIT <BR> HOUR (CH)</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;" >GRADE POINT (GP)</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;">GRADE</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;">FINAL GRADE (FG)</th>
-                        <th style="border-left:1px solid black;border-right:1px solid black;">Remarks</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Code</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black; width: 300px;"  rowspan="2">Subject</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;"  rowspan="2">Credit Hour</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;" colspan="2">Obtained Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Final Grade</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Grade Point</th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;" rowspan="2">Remarks</th>
+                    </tr>
+                    <tr>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">
+                            TH
+                        </th>
+                        <th style="border-left:1px solid black;border-right:1px solid black;">
+                            PR
+                        </th>
                     </tr>
                 </thead>
                 
@@ -206,65 +214,36 @@
                             $totalcredit=0;
                             $hasop=false;
                         @endphp
-                        @foreach ($data['marks_old'] as $datas)
+                        @foreach ($data['marks'] as $dataitem)
+                        @if(!$dataitem->isop)
+                        <tr style="border:none !important;">
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->code }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->name }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->credithour}}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{$dataitem->grades[0]??'' }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{$dataitem->grades[1]??'' }} </td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->isabs?'ABS':$dataitem->finalgrade->grade_name }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->isabs?'-':$dataitem->finalgrade->gpa }}</td>
+                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                             @php
-                                $isabs=false;
-                                $_totgrade=0;
-                                $_totalcredit=0;
-                                $_finalGrade='ABS';
-                                $_finalGradePoint='ABS';
-                                foreach ($datas as $dataitem){
-                                    if($dataitem->is_absent || $isabs){
-                                        $isabs=true;
-                                    }else{
-                                        $_totgrade+= $dataitem->total_gpa_point * $dataitem->credit_hour;
-                                        $_totalcredit+=$dataitem->credit_hour;
-                                    }
+                                $tt+=1;
+                                if(!$dataitem->isabs){
+                                    $totgrade+=$dataitem->total_gpa_grade * $dataitem->credithour;
+                                    $totalcredit+=$dataitem->credithour;
                                 }
-
-                                if(!$isabs){
-                                    $totgrade+=$_totgrade;
-                                    $totalcredit+=$_totalcredit;
-                                    $_finalGradePoint=round($_totgrade/$_totalcredit,2);
-                                    if($_finalGradePoint==0){
-                                        $_finalGrade='NG';
-                                    }else{
-                                        $_=$grades->where('from','<=',$_finalGradePoint )->where('up','>=',$_finalGradePoint)->first();
-                                       
-                                        if($_){
-                                            $_finalGrade=$_->grade_name;
-                                        }
-
-                                    }
-                                }
-
                             @endphp
-                            @foreach ($datas as $key=>$dataitem)
-                                @if(!$dataitem->isop)
-                                <tr style="border:none !important;">
-                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->code }}</td>
-                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->name }}</td>
-                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->credit_hour}}</td>
-                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->is_absent?'ABS':number_format((float)($dataitem->total_gpa_point),2,'.','')}}</td>
-                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->is_absent?'ABS':$dataitem->total_gpa_grade }}</td>
-                                    @if($key==0)
-                                        <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;" rowspan="2">{{ $_finalGrade }}</td>
-                                    @endif
-                                    <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;"></td>
-                                    @php
-                                        $tt+=1;
-                                    @endphp
-                                </tr>
-                                @else
-                                    @php
-                                        $hasop=true;
-                                    @endphp
-                                @endif
-                            @endforeach
+                        </tr>
+                        @else
+                            @php
+                                $hasop=true;
+                            @endphp
+                        @endif
+                        
                         @endforeach
                         
                         @for ($i = $tt; $i < 10; $i++)
                             <tr style="border:none !important;">
+                                <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
                                 <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
                                 <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
                                 <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
@@ -277,17 +256,24 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                          
-                            <th colspan="5" class="text-right">
+                            <th>
                                 
-                                    GRADE POINT AVERAGE(GPA):
                             </th>
-                            <th colspan="2">
-                                {{round(($totgrade/$totalcredit),2)}}
+                            <th>
+                                Total
                             </th>
+                            <th></th>
+                            <th></th>
+                            <th colspan="3">
+                                @if ($totalcredit!=0)
+                                    
+                                    GRADE POINT AVERAGE(GPA): {{round(($totgrade/$totalcredit),2)}}
+                                @endif
+                            </th>
+                            <th></th>
                             
                         </tr>
-                        <tr style="border:1px #black solid;">
+                        <tr style="border:1px #E2EAFF solid;">
                             <td colspan="7" style="border:none !important;">
                                 <h2 class="my-1 text-left">
                                     Extra Credit Subject
@@ -295,64 +281,30 @@
                             </td>
                         </tr>
                         @if($hasop)
-                            @foreach ($data['marks_old'] as $datas)
-                                @php
-                                    $isabs=false;
-                                    $_totgrade=0;
-                                    $_totalcredit=0;
-                                    $_finalGrade='ABS';
-                                    $_finalGradePoint='ABS';
-                                    foreach ($datas as $dataitem){
-                                        if($dataitem->is_absent || $isabs){
-                                            $isabs=true;
-                                        }else{
-                                            $_totgrade+= $dataitem->total_gpa_point * $dataitem->credit_hour;
-                                            $_totalcredit+=$dataitem->credit_hour;
-                                        }
-                                    }
-
-                                    if(!$isabs){
-                                        $_finalGradePoint=round($_totgrade/$_totalcredit,2);
-                                        if($_finalGradePoint==0){
-                                            $_finalGrade='NG';
-                                        }else{
-                                            $_=$grades->where('from','<=',$_finalGradePoint )->where('up','>=',$_finalGradePoint)->first();
-                                        
-                                            if($_){
-                                                $_finalGrade=$_->grade_name;
-                                            }
-
-                                        }
-                                    }
-
-                                @endphp
-                                @foreach ($datas as $key=>$dataitem)
-                                    @if($dataitem->isop)
-                                        <tr style="border:none !important;">
-                                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->code }}</td>
-                                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->name }}</td>
-                                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->credit_hour}}</td>
-                                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->is_absent?'ABS':number_format((float)($dataitem->total_gpa_point),2,'.','')}}</td>
-                                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->is_absent?'ABS':$dataitem->total_gpa_grade }}</td>
-                                            @if($key==0)
-                                                <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;" rowspan="2">{{ $_finalGrade }}</td>
-                                            @endif
-                                            <td style="padding:5px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;"></td>
-
-                                        </tr>
-                                    
-                                    @endif
-                                @endforeach
+                            @foreach ($data['marks'] as $dataitem)
+                                @if($dataitem->isop)
+                                    <tr style="border:none !important;">
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->code }}</td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;">{{ $dataitem->name }}</td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->credithour}}</td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{$dataitem->grades[0]??'' }}</td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{$dataitem->grades[1]??'' }} </td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->isabs?'ABS':$dataitem->finalgrade->grade_name }}</td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;">{{ $dataitem->isabs?'-':$dataitem->finalgrade->gpa }}</td>
+                                        <td style="padding:5px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                                    </tr>
+                                @endif
                             @endforeach
                         @else
-                        <tr style="border:1px solid black !important;">
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
-                            <td style="padding:12px !important;border-top:none !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black  !important;" ></td>
+                        <tr style="border:none !important;">
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important; text-align: left !important;text-transform: uppercase;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
+                            <td style="padding:15px !important;border-top:solid black 1px !important;border-bottom:none  !important;border-left:1px solid black !important;border-right:1px solid black !important;"></td>
                         </tr>
                         @endif
                     </tfoot>
